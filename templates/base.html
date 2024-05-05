@@ -8,33 +8,44 @@
     {% block css %} {% endblock %}
 </head>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let pathname = window.location.pathname;
-        let pointValue = true;
-        if (pathname === '/tballom/home/') {
-            pointValue = false;
-        }
-        
-        let pointDiv = document.querySelector('.point');
-        if (pointValue) {
-            pointDiv.style.display = 'block';
-        } else {
-            pointDiv.style.display = 'none';
-        }
+    document.addEventListener("DOMContentLoaded", function () {
+        let logo = document.getElementById('logo');
+        logo.addEventListener('click', function () {
+            window.location.href = '/tballom/main/';
+        });
     });
+
+    function movePage() {
+         // 이름 입력 안 하고 navItem 클릭 시
+        let game = document.getElementById('game');
+        game.addEventListener('click', function () {
+            window.location.href = '/tballom/game/';
+        });
+
+        let rank = document.getElementById('rank');
+        rank.addEventListener('click', function () {
+            window.location.href = '/tballom/rank/';
+        });
+
+        let store = document.getElementById('store');
+        store.addEventListener('click', function () {
+            window.location.href = '/tballom/store/';
+        });
+    }
 </script>
+{% block js %} {% endblock %}
 <body>
     <div class="container">
         <img src="{% static 'tballom/images/background.png' %}" alt="background">
         <nav>
-            <div class="imgDiv"> <img src="{% static 'tballom/images/logo.png' %}" alt="logo"> </div>
+            <div class="imgDiv" id="logo"> <img src="{% static 'tballom/images/logo.png' %}" alt="logo"> </div>
             <div class="nav-item">
-                <p>GAME</p>
-                <p>RANK</p>
-                <p>STORE</p>
+                <p id="game">GAME</p>
+                <p id="rank">RANK</p>
+                <p id="store">STORE</p>
             </div>
             <div class="point">
-                <p>POINT: 51</p>
+                <p>POINT: 0</p>
             </div>
         </nav>
         {% block content %}

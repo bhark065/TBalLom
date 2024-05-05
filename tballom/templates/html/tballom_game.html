@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Game {% endblock %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tballom_game.css' %}">
+{% endblock %}
+
+{% block js %}
+    <script>
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="game-container">
+        <div class="ball-imgDiv"> <img src="{% static '/tballom/images/T-ballBall.png' %}" /> </div>
+        <div class="game-imgDiv-container">
+            <div class="game-imgDiv"> <img src="{% static '/tballom/images/T-ballStand.png' %}" /> </div>
+        </div>
+    </div>
+{% endblock %}

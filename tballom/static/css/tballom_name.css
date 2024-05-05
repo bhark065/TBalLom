@@ -10,7 +10,7 @@
 .title {
     height: 7.5vh;
     font-family: var(--pretendard-font);
-    font-weight: 700;
+    font-weight: var(--Bold);
     font-size: 24px;
     color: white;
 }

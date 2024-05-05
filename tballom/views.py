@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def tballom_name_view(request):
     return render(request, 'html/tballom_name.html')
+
+def tballom_game_view(request):
+    return render(request, 'html/tballom_game.html')

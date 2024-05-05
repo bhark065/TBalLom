@@ -37,10 +37,9 @@ body {
     height: 100%;
 }
 
-nav {
+.container > nav {
     width: 100%;
     display: flex;
-    /*justify-content: space-between;*/
     align-items: center;
     position: fixed;
     top: 0;
@@ -58,6 +57,9 @@ nav {
     font-weight: var(--Bold);
     font-size: 18px;
     color: var(--main-color);
+}
+.nav-item > p {
+    cursor: pointer;
 }
 
 .point {
