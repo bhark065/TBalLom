@@ -1,0 +1,33 @@
+.name-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 12.5%;
+}
+
+.title {
+    height: 7.5vh;
+    font-family: var(--pretendard-font);
+    font-weight: 700;
+    font-size: 24px;
+    color: white;
+}
+
+.name-container > input {
+    text-align: center;
+    width: 23.5vw;
+    height: 12vh;
+    border: 0;
+    background-color: transparent;
+    outline: none;
+
+    font-family: var(--pretendard-font);
+    font-weight: var(--Bold);
+    font-size: 24px;
+    color: var(--main-color);
+}
+.name-container > input::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+}

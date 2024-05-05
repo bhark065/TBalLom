@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
     {% block css %} {% endblock %}
 </head>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let pathname = window.location.pathname;
+        let pointValue = true;
+        if (pathname === '/tballom/home/') {
+            pointValue = false;
+        }
+        
+        let pointDiv = document.querySelector('.point');
+        if (pointValue) {
+            pointDiv.style.display = 'block';
+        } else {
+            pointDiv.style.display = 'none';
+        }
+    });
+</script>
 <body>
     <div class="container">
         <img src="{% static 'tballom/images/background.png' %}" alt="background">

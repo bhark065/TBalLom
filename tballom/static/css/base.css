@@ -17,6 +17,7 @@ body {
     width: 100vw;
     height: 100vh;
     display: flex;
+    justify-content: center;
     margin: 0;
 }
 
@@ -28,6 +29,8 @@ body {
 .imgDiv {
     width: 66px;
     height: 72px;
+    padding-top: 6px;
+    padding-left: 24px;
 }
 .imgDiv > img {
     width: 100%;
@@ -35,23 +38,21 @@ body {
 }
 
 nav {
-    width: 97%;
-    height: 84px;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
     position: fixed;
     top: 0;
     left: 0;
-    padding: 6px 24px;
     z-index: 100;
     background-color: transparent;
+    column-gap: 670px;
 }
 
 .nav-item {
-    width: 30%;
     display: flex;
-    justify-content: space-around;
+    column-gap: 105px;
 
     font-family: var(--pretendard-font);
     font-weight: var(--Bold);
@@ -64,4 +65,5 @@ nav {
     font-weight: var(--Bold);
     font-size: 18px;
     color: var(--main-color);
+    padding-right: 24px;
 }
