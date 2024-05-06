@@ -42,11 +42,13 @@
             store.style.cursor = 'default';
             logo.style.cursor = 'default';
 
+            // 키보드로 배트 위치 조절
             let batImgDiv = document.querySelector('.bat-imgDiv');
             let angle = 0; // 초기 각도
+            let isSwinging = false;
 
-            // 키보드로 배트 위치 조절
             document.addEventListener('keydown', function(event) {
+                if (isSwinging) return;
                 const moveNum = 10; // 이동 속도
                 const angleNum = 5;
                 let top = parseInt(window.getComputedStyle(batImgDiv).getPropertyValue('top'));
@@ -66,6 +68,9 @@
                         left += moveNum;
                         break;
                 }
+                // 위치 변경
+                batImgDiv.style.top = top + 'px';
+                batImgDiv.style.left = left + 'px';
 
                 let isShiftPressed = event.shiftKey;
                 if (isShiftPressed) {
@@ -77,13 +82,55 @@
                             angle += angleNum;
                             break;
                     }
-
                     batImgDiv.style.transform = `rotate(${angle}deg)`;
                 }
 
-                // 위치 변경
-                batImgDiv.style.top = top + 'px';
-                batImgDiv.style.left = left + 'px';
+                if (event.key === 'Enter') {
+                    swingBat(batImgDiv);
+                }
+
+                function swingBat(batImgDiv) {
+                    batImgDiv.style.transition = 'transform 0.3s';
+                    batImgDiv.style.transform = 'rotate(100deg)';
+                    setTimeout(() => {
+                        batImgDiv.style.transition = 'transform 0.1s';
+                        batImgDiv.style.transform = `rotate(${angle}deg)`;
+                        isSwinging = false;
+
+                        // ball-imgDiv와 bat-center의 위치 정보 가져오기
+                        let ballImgDiv = document.querySelector('.ball-imgDiv');
+                        let batCenter = document.querySelector('.bat-center');
+
+                        let batCenterRect = batCenter.getBoundingClientRect();
+                        let ballImgDivRect = ballImgDiv.getBoundingClientRect();
+
+                        let x = Math.trunc(Math.min(ballImgDivRect.right, batCenterRect.right) - Math.max(ballImgDivRect.left, batCenterRect.left));
+                        let y = Math.trunc(Math.min(ballImgDivRect.bottom, batCenterRect.bottom) - Math.max(ballImgDivRect.top, batCenterRect.top));
+
+                        console.log(x, y)
+
+                        // 만약 겹치는 부분이 있으면
+                        if (x >= 5 && y >= -48) {
+                            ballImgDiv.style.transition = 'transform 1s';
+                            ballImgDiv.style.transform = 'translateX(1000px) translateY(-500px)'; // 예시로 좌표값 조정
+                         }
+
+
+                        // 3초 후 원래 자리로 돌아오기
+                        setTimeout(() => {
+                            ballImgDiv.style.transform = 'translateX(0px) translateY(0px)';
+                            ballImgDiv.style.transition = 'none';
+
+                            batImgDiv.style.transition = 'none';
+                            batImgDiv.style.top = '67%';
+                            batImgDiv.style.left = '37%';
+                         }, 3000);
+                    }, 500);
+                }
+
+                gameContainer.addEventListener('click', () => {
+                    document.removeEventListener('keydown', handleKeyDown);
+                });
             });
         });
 
@@ -99,6 +146,6 @@
         <div class="game-imgDiv-container">
             <div class="game-imgDiv"> <img src="{% static '/tballom/images/T-ballStand.png' %}" /> </div>
         </div>
-        <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <img src="{% static '/tballom/images/파리채.png' %}" /> </div>
+        <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <div class="bat-center"></div> <img src="{% static '/tballom/images/파리채.png' %}" /> </div>
     </div>
 {% endblock %}
