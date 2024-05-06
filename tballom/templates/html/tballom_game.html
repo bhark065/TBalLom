@@ -10,11 +10,44 @@
 {% block js %}
     <script>
 
+        document.addEventListener("DOMContentLoaded", function () {
+            let game = document.getElementById('game');
+            let rank = document.getElementById('rank');
+            let store = document.getElementById('store');
+            let nav = document.querySelector('nav');
+            let background = document.getElementById("background");
+            let buttonContainer = document.querySelector('.button-container');
+            let gameContainer = document.querySelector('.game-container');
+
+            let startButton = document.getElementById('start-button');
+            startButton.addEventListener('click', startGame);
+
+            function startGame() {
+                buttonContainer.style.display = 'none';
+                gameContainer.style.display = 'block';
+                background.style.filter = 'brightness(100%)';
+                nav.style.filter = 'brightness(100%)';
+
+                game.style.cursor = 'pointer';
+                rank.style.cursor = 'pointer';
+                store.style.cursor = 'pointer';
+            }
+
+            background.style.filter = 'brightness(0.5)';
+            nav.style.filter = 'brightness(0.5)';
+            game.style.cursor = 'none';
+            rank.style.cursor = 'none';
+            store.style.cursor = 'none';
+        });
+
     </script>
 {% endblock %}
 
 {% block content %}
-    <div class="game-container">
+    <div class="button-container">
+        <button id="start-button">게임시작</button>
+    </div>
+    <div class="game-container" style="display: none;">
         <div class="ball-imgDiv"> <img src="{% static '/tballom/images/T-ballBall.png' %}" /> </div>
         <div class="game-imgDiv-container">
             <div class="game-imgDiv"> <img src="{% static '/tballom/images/T-ballStand.png' %}" /> </div>

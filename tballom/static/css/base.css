@@ -31,6 +31,7 @@ body {
     height: 72px;
     padding-top: 6px;
     padding-left: 24px;
+    cursor: pointer;
 }
 .imgDiv > img {
     width: 100%;

@@ -13,13 +13,6 @@
             let pointDiv = document.querySelector('.point');
             pointDiv.style.display = 'none';
 
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.nav-item')) {
-                    playBackgroundMusic();
-                    document.removeEventListener('click', playBackgroundMusic);
-                }
-            });
-
             function playBackgroundMusic() {
                 let bgMusic = document.getElementById('bgMusic');
                 bgMusic.play();
@@ -32,19 +25,20 @@
                     }
                 });
             }
+            window.onload = playBackgroundMusic;
 
-            // 버튼 클릭 시
-            let nameInput = document.getElementById('nameInput').value;
-            if (nameInput.value === '') {
-                let navItems = document.querySelectorAll('.nav-item p');
-                navItems.forEach(function(item) {
-                    item.addEventListener('click', function() {
+            // 이름 입력 안 하고 nav 클릭할 경우
+            let navItems = document.querySelectorAll('.nav-item p');
+            navItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    let nameInput = document.getElementById('name-input').value;
+                    if (nameInput === '') {
                         alert('이름을 입력해주세요');
-                    });
+                    } else {
+                        movePage();
+                    }
                 });
-            } else {
-                movePage();
-            }
+            });
         });
     </script>
 {% endblock %}
@@ -53,6 +47,6 @@
     <audio id="bgMusic" src="{% static 'music/치고 달려라.mp3' %}" loop></audio>
     <div class="name-container">
         <div class="title"> <p>사용할 이름을 입력해주세요 :></p> </div>
-        <Input id="nameInput" placeholder="이름 입력" />
+        <Input id="name-input" placeholder="이름 입력" />
     </div>
 {% endblock %}
