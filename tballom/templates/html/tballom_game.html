@@ -14,6 +14,7 @@
             let game = document.getElementById('game');
             let rank = document.getElementById('rank');
             let store = document.getElementById('store');
+            let logo = document.getElementById("logo");
             let nav = document.querySelector('nav');
             let background = document.getElementById("background");
             let buttonContainer = document.querySelector('.button-container');
@@ -31,13 +32,59 @@
                 game.style.cursor = 'pointer';
                 rank.style.cursor = 'pointer';
                 store.style.cursor = 'pointer';
+                logo.style.cursor = 'pointer';
             }
 
             background.style.filter = 'brightness(0.5)';
             nav.style.filter = 'brightness(0.5)';
-            game.style.cursor = 'none';
-            rank.style.cursor = 'none';
-            store.style.cursor = 'none';
+            game.style.cursor = 'default';
+            rank.style.cursor = 'default';
+            store.style.cursor = 'default';
+            logo.style.cursor = 'default';
+
+            let batImgDiv = document.querySelector('.bat-imgDiv');
+            let angle = 0; // 초기 각도
+
+            // 키보드로 배트 위치 조절
+            document.addEventListener('keydown', function(event) {
+                const moveNum = 10; // 이동 속도
+                const angleNum = 5;
+                let top = parseInt(window.getComputedStyle(batImgDiv).getPropertyValue('top'));
+                let left = parseInt(window.getComputedStyle(batImgDiv).getPropertyValue('left'));
+
+                switch(event.key) {
+                    case 'ArrowUp':
+                        top -= moveNum;
+                        break;
+                    case 'ArrowDown':
+                        top += moveNum;
+                        break;
+                    case 'ArrowLeft':
+                        left -= moveNum;
+                        break;
+                    case 'ArrowRight':
+                        left += moveNum;
+                        break;
+                }
+
+                let isShiftPressed = event.shiftKey;
+                if (isShiftPressed) {
+                    switch(event.key) {
+                        case 'ArrowLeft':
+                            angle -= angleNum;
+                            break;
+                        case 'ArrowRight':
+                            angle += angleNum;
+                            break;
+                    }
+
+                    batImgDiv.style.transform = `rotate(${angle}deg)`;
+                }
+
+                // 위치 변경
+                batImgDiv.style.top = top + 'px';
+                batImgDiv.style.left = left + 'px';
+            });
         });
 
     </script>
@@ -52,5 +99,6 @@
         <div class="game-imgDiv-container">
             <div class="game-imgDiv"> <img src="{% static '/tballom/images/T-ballStand.png' %}" /> </div>
         </div>
+        <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <img src="{% static '/tballom/images/파리채.png' %}" /> </div>
     </div>
 {% endblock %}
