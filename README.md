@@ -12,7 +12,7 @@
 
 #### 👩‍💻개발자
 - 양가윤 : https://github.com/rkdbs
-- 최보람 : http://github.com/bhark
+- 최보람 : http://github.com/bhark065
 
 * * *
 ```
