@@ -19,12 +19,31 @@
             let background = document.getElementById("background");
             let buttonContainer = document.querySelector('.button-container');
             let gameContainer = document.querySelector('.game-container');
+            let endMessage = document.getElementById('endMessage');
 
             let startButton = document.getElementById('start-button');
             startButton.addEventListener('click', startGame);
 
+            let swingCount = 0; // 배트 휘든 횟수
+
+            // 마우스 우클릭 시 배트 변경 메뉴 생성
+            let contextMenu = document.querySelector('.contextmenu');
+            gameContainer.addEventListener('contextmenu', function (event) {
+                event.preventDefault();
+                let posX = event.pageX;
+                let posY = event.pageY;
+
+                contextMenu.style.left = posX + 'px';
+                contextMenu.style.top = posY + 'px';
+                contextMenu.style.position = 'absolute';
+                contextMenu.style.display = 'flex';
+            });
+            document.addEventListener('click', function () {
+                contextMenu.style.display = 'none';
+            });
             function startGame() {
                 buttonContainer.style.display = 'none';
+                startButton.style.display = 'none';
                 gameContainer.style.display = 'block';
                 background.style.filter = 'brightness(100%)';
                 nav.style.filter = 'brightness(100%)';
@@ -37,6 +56,7 @@
 
             background.style.filter = 'brightness(0.5)';
             nav.style.filter = 'brightness(0.5)';
+            endMessage.style.display = 'none';
             game.style.cursor = 'default';
             rank.style.cursor = 'default';
             store.style.cursor = 'default';
@@ -87,11 +107,13 @@
 
                 if (event.key === 'Enter') {
                     swingBat(batImgDiv);
+                    swingCount++;
                 }
 
                 function swingBat(batImgDiv) {
                     batImgDiv.style.transition = 'transform 0.3s';
                     batImgDiv.style.transform = 'rotate(100deg)';
+                    let isSwinging = true;
                     setTimeout(() => {
                         batImgDiv.style.transition = 'transform 0.1s';
                         batImgDiv.style.transform = `rotate(${angle}deg)`;
@@ -107,12 +129,25 @@
                         let x = Math.trunc(Math.min(ballImgDivRect.right, batCenterRect.right) - Math.max(ballImgDivRect.left, batCenterRect.left));
                         let y = Math.trunc(Math.min(ballImgDivRect.bottom, batCenterRect.bottom) - Math.max(ballImgDivRect.top, batCenterRect.top));
 
-                        console.log(x, y)
+                        console.log(x, y);
 
                         // 만약 겹치는 부분이 있으면
                         if (x >= 5 && y >= -48) {
                             ballImgDiv.style.transition = 'transform 1s';
-                            ballImgDiv.style.transform = 'translateX(1000px) translateY(-500px)'; // 예시로 좌표값 조정
+                            ballImgDiv.style.transform = 'translateX(-700px) translateY(-300px)'; // 왼쪽1 안타 1초로 할 것
+                            {#ballImgDiv.style.transform = 'translateX(-700px) translateY(-200px)'; // 왼쪽2 안타 1초로 할 것#}
+                            {#ballImgDiv.style.transform = 'translateX(700px) translateY(-300px)'; // 오른쪽1 안타 1초로 할 것#}
+                            {#ballImgDiv.style.transform = 'translateX(700px) translateY(-200px)'; // 오른쪽2 안타 1초로 할 것#}
+
+                            {#ballImgDiv.style.transform = 'translateX(10px) translateY(-1000vh)'; // 정면 홈런 좌표값 3초로 할 것#}
+                            {#ballImgDiv.style.transform = 'translateX(800vh) translateY(-1000vh)'; // 오른쪽 홈런 3초로 할 것#}
+                            {#ballImgDiv.style.transform = 'translateX(-800vh) translateY(-1000vh)'; // 왼쪽 홈런 3초로 할 것#}
+
+                            {#ballImgDiv.style.transform = 'translateX(1000px) translateY(-700px)'; // 오른쪽 파울 1초로 할 것#}
+                            {#ballImgDiv.style.transform = 'translateX(-1000px) translateY(-700px)'; // 왼쪽 파울 1초로 할 것#}
+                            {#ballImgDiv.style.transform = 'translateX(0px) translateY(200px)'; // 정면 아래 파울 1초로 할 것#}
+                            {#ballImgDiv.style.transform = 'translateX(800px) translateY(150px)'; // 오른쪽 아래 파울 1초로 할 것#}
+                            {#ballImgDiv.style.transform = 'translateX(-800px) translateY(150px)'; // 오른쪽 아래 파울 1초로 할 것#}
                          }
 
 
@@ -124,6 +159,9 @@
                             batImgDiv.style.transition = 'none';
                             batImgDiv.style.top = '67%';
                             batImgDiv.style.left = '37%';
+                            if (swingCount >= 3) {
+                                endGame();
+                            }
                          }, 3000);
                     }, 500);
                 }
@@ -131,7 +169,23 @@
                 gameContainer.addEventListener('click', () => {
                     document.removeEventListener('keydown', handleKeyDown);
                 });
+
+                console.log(swingCount);
             });
+
+            function endGame() {
+                // 게임 종료 시 화면에 메시지 표시
+                buttonContainer.style.display = 'flex';
+                gameContainer.style.display = 'none';
+                background.style.filter = 'brightness(0.5)';
+                nav.style.filter = 'brightness(0.5)';
+                game.style.cursor = 'default';
+                rank.style.cursor = 'default';
+                store.style.cursor = 'default';
+                logo.style.cursor = 'default';
+                endMessage.style.display = 'block';
+            }
+
         });
 
     </script>
@@ -140,6 +194,7 @@
 {% block content %}
     <div class="button-container">
         <button id="start-button">게임시작</button>
+        <p id='endMessage' style="font-family: var(--pretendard-font); font-weight: var(--Bold); font-size: 50px; color: white;">게임종료</p>
     </div>
     <div class="game-container" style="display: none;">
         <div class="ball-imgDiv"> <img src="{% static '/tballom/images/T-ballBall.png' %}" /> </div>
@@ -147,5 +202,13 @@
             <div class="game-imgDiv"> <img src="{% static '/tballom/images/T-ballStand.png' %}" /> </div>
         </div>
         <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <div class="bat-center"></div> <img src="{% static '/tballom/images/파리채.png' %}" /> </div>
+        <div class="menuContainer">
+            <ul class="contextmenu menu">
+              <li><a href="#">파리채</a></li>
+              <li><a href="#">탁구채</a></li>
+              <li><a href="#">나무배트</a></li>
+              <li><a href="#">후라이팬</a></li>
+            </ul>
+        </div>
     </div>
 {% endblock %}

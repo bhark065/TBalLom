@@ -25,7 +25,7 @@
                     }
                 });
             }
-            window.onload = playBackgroundMusic;
+            window.onload = playBackgroundMusic();
 
             // 이름 입력 안 하고 nav 클릭할 경우
             let navItems = document.querySelectorAll('.nav-item p');
@@ -33,7 +33,7 @@
                 item.addEventListener('click', function() {
                     let nameInput = document.getElementById('name-input').value;
                     if (nameInput === '') {
-                        alert('이름을 입력해주세요');
+                        alert('아이디를 입력해주세요');
                     } else {
                         movePage();
                     }
@@ -46,7 +46,7 @@
 {% block content %}
     <audio id="bgMusic" src="{% static 'music/치고 달려라.mp3' %}" loop></audio>
     <div class="name-container">
-        <div class="title"> <p>사용할 이름을 입력해주세요 :></p> </div>
-        <Input id="name-input" placeholder="이름 입력" />
+        <div class="title"> <p>사용할 아이디를 입력해주세요 :></p> </div>
+        <Input id="name-input" placeholder="아이디 입력" />
     </div>
 {% endblock %}
