@@ -25,8 +25,9 @@
 .game-imgDiv-container {
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .game-imgDiv {
@@ -40,12 +41,11 @@
 }
 
 .ball-imgDiv {
-    position: absolute;
+    position: relative;
     width: 50px;
     height: 50px;
     border-radius: 100%;
-    left: 48.8%;
-    top: 69.5%;
+    margin-bottom: -2%;
 }
 .ball-imgDiv > img {
     width: 100%;
@@ -66,10 +66,20 @@
     object-fit: cover;
 }
 
-.bat-center {
+/* 배트 div */
+.bat-flyswatter {
     position: absolute;
     width: 70px;
     height: 70px;
+    top: 5%;
+    right: 5%;
+    /*border: 1px solid black;*/
+}
+
+.bat-TableTennis {
+    position: absolute;
+    width: 90px;
+    height: 90px;
     top: 5%;
     right: 5%;
     border: 1px solid black;
@@ -121,5 +131,5 @@
 }
 
 .menu li:hover {
-    background-color: rgba(1,32,99,0.3);
+    background-color: rgba(1,32,99,0.2);
 }
