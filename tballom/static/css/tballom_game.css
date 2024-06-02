@@ -93,6 +93,15 @@
     transform: rotate(45deg);
 }
 
+.bat-FlyingPan {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 15%;
+    right: 15%;
+    border: 1px solid black;
+}
+
 /* 우클릭 시 생기는 메뉴바 */
 .menuContainer {
     border: 1px solid var(--main-color);
