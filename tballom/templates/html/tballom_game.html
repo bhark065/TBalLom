@@ -87,15 +87,23 @@
 
                 let imgPath = decodeURIComponent(imagePath);
                 let addClassName = document.querySelector('.bat-imgDiv div');
+                // 이미지에 따라 클래스 이름 변경
                 if (imgPath.includes('파리채.png')) {
                     addClassName.classList.add('bat-flyswatter');
                     addClassName.classList.remove('bat-TableTennis');
+                    addClassName.classList.remove('bat-wood');
                 } else if (imgPath.includes('탁구채.png')) {
                     addClassName.classList.add('bat-TableTennis');
                     addClassName.classList.remove('bat-flyswatter');
-                } else {
-                    addClassName.classList.remove('bat-TableTennis');
+                    addClassName.classList.remove('bat-wood');
+                } else if (imgPath.includes('나무 배트.png')) {
+                    addClassName.classList.add('bat-wood');
                     addClassName.classList.remove('bat-flyswatter');
+                    addClassName.classList.remove('bat-TableTennis');
+                } else {
+                    addClassName.classList.remove('bat-flyswatter');
+                    addClassName.classList.remove('bat-TableTennis');
+                    addClassName.classList.remove('bat-wood');
                 }
             }
 
@@ -151,6 +159,7 @@
                 if (event.key === 'Enter') {
                     swingBat(batImgDiv);
                     swingCount++;
+                    console.log(swingCount);
                 }
 
                 function swingBat(batImgDiv) {
@@ -169,11 +178,12 @@
                         let batCenterRect = batCenter.getBoundingClientRect();
                         let ballImgDivRect = ballImgDiv.getBoundingClientRect();
 
-                        let x = Math.trunc(Math.min(ballImgDivRect.right, batCenterRect.right) - Math.max(ballImgDivRect.left, batCenterRect.left));
-                        let y = Math.trunc(Math.min(ballImgDivRect.bottom, batCenterRect.bottom) - Math.max(ballImgDivRect.top, batCenterRect.top));
+                        let x = Math.min(ballImgDivRect.right, batCenterRect.right) - Math.max(ballImgDivRect.left, batCenterRect.left);
+                        let y = Math.min(ballImgDivRect.bottom, batCenterRect.bottom) - Math.max(ballImgDivRect.top, batCenterRect.top);
 
                         console.log(x, y);
 
+                        // fileName 구하기
                         var imgElement = document.querySelector('.bat-imgDiv img');
                         var src = imgElement.getAttribute('src');
                         var filename = src.split('/').pop();
@@ -183,6 +193,94 @@
                         if (decodedFilename === '파리채.png') {
                             // 만약 겹치는 부분이 있으면
                             if (x >= 5 && y >= -48) {
+                                if (x === 50 && y === 31) { // 왼쪽 안타
+                                    console.log("왼쪽 안타");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(-700px) translateY(-200px)';
+                                } else if ((x === 38 || x === 48) && (y >= -48 && y <= -38)) { // 오른쪽 안타
+                                    console.log("오른쪽 안타");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(700px) translateY(-200px)';
+                                } else if ((x === 42 || x === 41)&& (y >= -65 && y <= -35)) { // 오른쪽 파울
+                                    console.log("오른쪽 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(1000px) translateY(-100px)';
+                                } else if ((x === 34 || x === 44) && (y >= -53 && y <= -33)) { // 왼쪽 파울
+                                    console.log("왼쪽 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(-1000px) translateY(-100px)';
+                                } else if (x === 50 && y === -58) { // 정면 홈런
+                                    console.log("정면 홈런");
+                                    ballImgDiv.style.transition = 'transform 3s';
+                                    ballImgDiv.style.transform = 'translateX(10px) translateY(-1000vh)';
+                                } else if (x === 50 && y === -48) { // 왼쪽 홈런
+                                    console.log("왼쪽 홈런");
+                                    ballImgDiv.style.transition = 'transform 3s';
+                                    ballImgDiv.style.transform = 'translateX(-800vh) translateY(-1000vh)';
+                                } else if (x === 38 && y === -48) { // 오른쪽 홈런
+                                    console.log("오른쪽 홈런");
+                                    ballImgDiv.style.transition = 'transform 3s';
+                                    ballImgDiv.style.transform = 'translateX(800vh) translateY(-1000vh)';
+                                } else if (x === 50 && y === -28) { // 정면 아래 파울
+                                    console.log("정면 아래 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(0px) translateY(200px)';
+                                } else if (x === 48 && y === -28) { // 오른쪽 아래 파울
+                                    console.log("오른쪽 아래 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(800px) translateY(150px)';
+                                } else if (x === 44 && (y === -28 || y === -18)) { // 왼쪽 아래 파울
+                                    console.log("왼쪽 아래 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(-800px) translateY(150px)';
+                                }
+                            }
+                        } else if (decodedFilename === '탁구채.png') {
+                            if (x >= 5 && y >= -48) {
+                                if (x === 50 && (y >= 42 && y <= 43)) { // 왼쪽 안타
+                                    console.log("왼쪽 안타");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(-700px) translateY(-200px)';
+                                } else if (x === 50 && (y >= 32 && y <= 33)) { // 오른쪽 안타
+                                    console.log("오른쪽 안타");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(700px) translateY(-200px)';
+                                } else if ((x <= 50 && x >= 33) && (y >= 45 && y < 50)) { // 오른쪽 파울
+                                    console.log("오른쪽 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(1000px) translateY(-100px)';
+                                } else if((x <= 40 && x >= 22) && (y >= 40 && y <= 45)) { // 왼쪽 파울
+                                    console.log("왼쪽 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(-1000px) translateY(-100px)';
+                                } else if (x === 50 && (y >= 41 && y < 42)) { // 정면 홈런
+                                    console.log("정면 홈런");
+                                    ballImgDiv.style.transition = 'transform 3s';
+                                    ballImgDiv.style.transform = 'translateX(10px) translateY(-1000vh)';
+                                } else if (x === 50 && (y >= 21 && y < 22)) { // 왼쪽 홈런
+                                    console.log("왼쪽 홈런");
+                                    ballImgDiv.style.transition = 'transform 3s';
+                                    ballImgDiv.style.transform = 'translateX(-800vh) translateY(-1000vh)';
+                                } else if (x === 50 && (y >= 31 && y < 32)) { // 오른쪽 홈런
+                                    console.log("오른쪽 홈런");
+                                    ballImgDiv.style.transition = 'transform 3s';
+                                    ballImgDiv.style.transform = 'translateX(800vh) translateY(-1000vh)';
+                                } else if (x === 50 && (y >= 11 && y <= 50)) { // 정면 아래 파울
+                                    console.log("정면 아래 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(0px) translateY(200px)';
+                                } else if ((x >= 43 && x <= 50) && (y >= 21 && y <= 50)) { // 오른쪽 아래 파울
+                                    console.log("오른쪽 아래 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(800px) translateY(150px)';
+                                } else if ((x >= 32 && x <= 43) && y <= 50) { // 왼쪽 아래 파울
+                                    console.log("왼쪽 아래 파울");
+                                    ballImgDiv.style.transition = 'transform 1s';
+                                    ballImgDiv.style.transform = 'translateX(-800px) translateY(150px)';
+                                }
+                            }
+                        } else if (decodedFilename === '나무 배트.png') {
+                            if ((x >= 7 && y >= -14) && (x <= 50 && y <= 23)) {
                                 if (x === 50 && (y >= -83 && y <= -38)) { // 왼쪽 안타
                                     console.log("왼쪽 안타");
                                     ballImgDiv.style.transition = 'transform 1s';
@@ -225,11 +323,7 @@
                                     ballImgDiv.style.transform = 'translateX(-800px) translateY(150px)';
                                 }
                             }
-                        } else if (decodedFilename === '탁구채.png') {
-
                         }
-
-
 
                         // 3초 후 원래 자리로 돌아오기
                         setTimeout(() => {
@@ -249,8 +343,6 @@
                 gameContainer.addEventListener('click', () => {
                     document.removeEventListener('keydown', handleKeyDown);
                 });
-
-                console.log(swingCount);
             });
 
             function endGame() {
@@ -280,7 +372,7 @@
             <div class="ball-imgDiv"> <img src="{% static '/tballom/images/T-ballBall.png' %}" /> </div>
             <div class="game-imgDiv"> <img src="{% static '/tballom/images/T-ballStand.png' %}" /> </div>
         </div>
-        <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <div class="bat-TableTennis"></div> <img src="{% static '/tballom/images/탁구채.png' %}" /> </div>
+        <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <div class="bat-wood"></div> <img src="{% static '/tballom/images/나무 배트.png' %}" /> </div>
         <div class="menuContainer">
             <ul class="contextmenu menu">
               <li><a href="#">파리채</a></li>

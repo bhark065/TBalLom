@@ -3,6 +3,7 @@
     height: 100%;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .button-container > button {
     width: 12vw;
@@ -73,16 +74,24 @@
     height: 70px;
     top: 5%;
     right: 5%;
-    /*border: 1px solid black;*/
 }
 
 .bat-TableTennis {
     position: absolute;
     width: 90px;
     height: 90px;
-    top: 5%;
-    right: 5%;
+    top: 18%;
+    right: 20%;
+}
+
+.bat-wood {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    top: 4%;
+    right: 24%;
     border: 1px solid black;
+    transform: rotate(45deg);
 }
 
 /* 우클릭 시 생기는 메뉴바 */
