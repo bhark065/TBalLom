@@ -32,9 +32,8 @@
             navItems.forEach(function(item) {
                 item.addEventListener('click', function() {
                     let nameInput = document.getElementById('name-input').value;
-                    let passwordInput = document.getElementById('password_input').value;
-                    if (!nameInput || !passwordInput) {
-                        alert("아이디와 비밀번호를 모두 입력하세요");
+                    if (!nameInput) {
+                        alert("아이디를 입력하세요");
                     } else {
                         movePage();
                     }
@@ -43,9 +42,8 @@
 
             document.getElementById("name-form").onsubmit = function() {
                 var userName = document.getElementById("name-input").value;
-                var password = document.getElementById("password_input").value;
-                if (!userName || !password) {
-                    alert("아이디와 비밀번호를 모두 입력하세요");
+                if (!userName) {
+                    alert("아이디를 입력하세요");
                     return false;
                 }
             };
@@ -59,7 +57,6 @@
         {% csrf_token %}
         <div class="title"> <p>사용할 아이디를 입력해주세요 :></p> </div>
         <input id="name-input" name="user_name" placeholder="아이디 입력" />
-        <input id="password_input" name="user_password" type="password" placeholder="비밀번호 입력" />
         <button type="submit">제출</button>
     </form>
 {% endblock %}

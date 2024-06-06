@@ -4,16 +4,21 @@ from .models import User
 # Create your views here.
 
 def tballom_name_view(request):
-    if request.method == 'POST':
-        user_name = request.POST.get('user_name')
-        password = request.POST.get('password')
-        if user_name and password:
-            user = User.objects.create(user_name=user_name, password=password)
-            return redirect('tballom_game', pk=user.pk)
-        else:
-            return render(request, 'html/tballom/tballom_name.html', {'error_message': '아이디와 비밀번호를 모두 입력하세요'})
-    else:
+    user_name = request.POST.get('user_name')
+    if not user_name:
         return render(request, 'html/tballom/tballom_name.html')
 
+    # user_name이 이미 존재하는지 확인
+    user = User.objects.filter(user_name=user_name).first()
+
+    if user:
+        # 이미 존재하는 사용자 이름일 경우
+        return redirect('tballom:tballom_game', pk=user.pk)
+    else:
+        # 새로운 사용자 이름일 경우
+        new_user = User.objects.create(user_name=user_name)
+        return redirect('tballom:tballom_game', pk=new_user.pk)
+
 def tballom_game_view(request, pk):
-    return render(request, 'html/tballom/tballom_game.html')
+    user = User.objects.get(pk=pk)
+    return render(request, 'html/tballom/tballom_game.html', {'user': user})
