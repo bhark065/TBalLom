@@ -18,14 +18,14 @@
 .name-container > input {
     text-align: center;
     width: 23.5vw;
-    height: 12vh;
+    height: 6vh;
     border: 0;
     background-color: transparent;
     outline: none;
 
     font-family: var(--pretendard-font);
     font-weight: var(--Bold);
-    font-size: 24px;
+    font-size: 20px;
     color: var(--main-color);
 }
 .name-container > input::placeholder {
