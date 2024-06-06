@@ -99,13 +99,59 @@
     height: 100px;
     top: 15%;
     right: 15%;
-    border: 1px solid black;
+}
+
+.bat-keyboard {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: 20%;
+    right: 19%;
+}
+
+.bat-toy {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    top: 18%;
+    right: 20%;
+}
+
+.bat-golf {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 11%;
+    right: 16%;
+    transform: rotate(35deg);
+}
+
+.bat-notebook {
+    position: absolute;
+    width: 135px;
+    height: 135px;
+    top: 15%;
+    right: 15%;
+}
+
+.bat-tennis{
+    position: absolute;
+    width: 60px;
+    height: 70px;
+    top: 20%;
+    right: 24%;
+}
+
+.bat-al {
+    position: absolute;
+    width: 20px;
+    height: 130px;
+    top: -2%;
+    right: 30%;
+    transform: rotate(40deg);
 }
 
 /* 우클릭 시 생기는 메뉴바 */
-.menuContainer {
-    border: 1px solid var(--main-color);
-}
 .menu {
     display: flex;
     left: 835px;
@@ -116,13 +162,13 @@
     padding: 4px;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
-    /*border-left: 1px solid var(--main-color);*/
     list-style: none;
     overflow: hidden;
     z-index: 999;
     align-items: center;
     row-gap: 10px;
     justify-content: center;
+    border: 2px solid #012063;
 }
 
 .menu li {
