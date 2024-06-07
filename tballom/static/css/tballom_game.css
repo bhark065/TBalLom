@@ -103,18 +103,21 @@
 
 .bat-keyboard {
     position: absolute;
-    width: 120px;
+    width: 45px;
     height: 120px;
     top: 20%;
-    right: 19%;
+    right: 38%;
+    border: 1px solid;
+    transform: rotate(45deg);
 }
 
 .bat-toy {
     position: absolute;
-    width: 90px;
+    width: 57px;
     height: 90px;
-    top: 18%;
-    right: 20%;
+    top: 20%;
+    right: 29%;
+    transform: rotate(43deg);
 }
 
 .bat-golf {
@@ -128,10 +131,11 @@
 
 .bat-notebook {
     position: absolute;
-    width: 135px;
-    height: 135px;
-    top: 15%;
-    right: 15%;
+    width: 80px;
+    height: 110px;
+    top: 23%;
+    right: 29%;
+    transform: rotate(50deg);
 }
 
 .bat-tennis{
@@ -153,22 +157,29 @@
 
 /* 우클릭 시 생기는 메뉴바 */
 .menu {
+    width: auto;
+    max-height: 200px;
     display: flex;
     left: 835px;
     top: 646px;
     position: absolute;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     margin: 0;
     padding: 4px;
-    background-color: rgb(255, 255, 255);
     border-radius: 5px;
     list-style: none;
-    overflow: hidden;
     z-index: 999;
-    align-items: center;
     row-gap: 10px;
-    justify-content: center;
-    border: 2px solid #012063;
+    border: 2px solid var(--main-color);
+    background-color: white;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.menu::-webkit-scrollbar {
+    display: none;
 }
 
 .menu li {
@@ -182,6 +193,7 @@
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    color: var(--main-color);
 }
 
 .menu li a {
