@@ -52,9 +52,6 @@
                     } else if (selectedOption === '탁구채') {
                         let imagePath = "{% static '/tballom/images/탁구채.png' %}";
                         changeBatImage(imagePath);
-                    } else if (selectedOption === '키보드') {
-                        let imagePath = "{% static '/tballom/images/키보드.png' %}";
-                        changeBatImage(imagePath);
                     } else if (selectedOption === '도깨비 배트') {
                         let imagePath = "{% static '/tballom/images/장난감 배트.png' %}";
                         changeBatImage(imagePath);
@@ -73,9 +70,6 @@
                     } else if (selectedOption === '골프채') {
                         let imagePath = "{% static '/tballom/images/골프채.png' %}";
                         changeBatImage(imagePath);
-                    } else if (selectedOption === '노트북') {
-                        let imagePath = "{% static '/tballom/images/노트북.png' %}";
-                        changeBatImage(imagePath);
                     }
                 });
             });
@@ -92,10 +86,8 @@
                 '탁구채.png': 'bat-TableTennis',
                 '나무 배트.png': 'bat-wood',
                 '후라이팬.png': 'bat-FlyingPan',
-                '키보드.png': 'bat-keyboard',
                 '장난감 배트.png': 'bat-toy',
                 '골프채.png': 'bat-golf',
-                '노트북.png': 'bat-notebook',
                 '테니스 라켓.png': 'bat-tennis',
                 '알루미늄 배트.png': 'bat-al'
             };
@@ -204,10 +196,8 @@
                             '탁구채.png': TableTennis,
                             '나무 배트.png': Wood,
                             '후라이팬.png': FlyingPan,
-                            '키보드.png': KeyBoard,
                             '장난감 배트.png': Toy,
                             '골프채.png': Golf,
-                            '노트북.png': NoteBook,
                             '테니스 라켓.png': Tennis,
                             '알루미늄 배트.png': Al
                         };
@@ -421,56 +411,6 @@
                             moveBall(translateX, translateY, duration);
                         }
 
-                        // 키보드 배트 스윙 함수
-                        function KeyBoard(x, y) {
-                            let translateX, translateY, duration = '1s';
-                            if ((x >= 46 && x < 47) && (y >= 20 && y < 21)) {
-                                console.log("왼쪽 안타");
-                                translateX = '-700px';
-                                translateY = '-200px';
-                            } else if ((x >= 49 && x < 51) && (y >= 42 && y < 43)) {
-                                console.log("오른쪽 안타");
-                                translateX = '700px';
-                                translateY = '-200px';
-                            } else if ((x >= 39 && x < 40) && (y >= 30 && y < 31)) {
-                                console.log("오른쪽 파울");
-                                translateX = '1000px';
-                                translateY = '-100px';
-                            } else if ((x >= 36 && x < 37) && (y >= 20 && y < 21)) {
-                                console.log("왼쪽 파울");
-                                translateX = '-1000px';
-                                translateY = '-100px';
-                            } else if (x === 50 && (y >= 20 && y < 21)) {
-                                console.log("정면 홈런");
-                                translateX = '10px';
-                                translateY = '-1000vh';
-                                duration = '3s';
-                            } else if (x === 50 && (y >= 30 && y < 31)) {
-                                console.log("왼쪽 홈런");
-                                translateX = '-800vh';
-                                translateY = '-1000vh';
-                                duration = '3s';
-                            } else if (x === 50 && (y >= 40 && y < 41)) {
-                                console.log("오른쪽 홈런");
-                                translateX = '800vh';
-                                translateY = '-1000vh';
-                                duration = '3s';
-                            } else if (x === 50 && (y >= 10 && y < 11)) {
-                                console.log("정면 아래 파울");
-                                translateX = '0px';
-                                translateY = '200px';
-                            } else if (x === 50 && y === 50) {
-                                console.log("오른쪽 아래 파울");
-                                translateX = '800px';
-                                translateY = '150px';
-                            } else if ((x >= 46 && x < 47) && y === 50) {
-                                console.log("왼쪽 아래 파울");
-                                translateX = '-800px';
-                                translateY = '150px';
-                            }
-                            moveBall(translateX, translateY, duration);
-                        }
-
                         // 장난감 배트 스윙 함수 (완성)
                         function Toy(x, y) {
                             let translateX, translateY, duration = '1s';
@@ -540,56 +480,6 @@
                                 console.log("왼쪽 파울");
                                 translateX = '-1000px';
                                 translateY = '-100px';
-                            } else if ((x >= 22 && x < 23) && (y >= -110 && y < -109)) {
-                                console.log("왼쪽 홈런");
-                                translateX = '-800vh';
-                                translateY = '-1000vh';
-                                duration = '3s';
-                            } else if ((x >= 28 && x < 29) && (y >= -90 && y < -89)) {
-                                console.log("오른쪽 홈런");
-                                translateX = '800vh';
-                                translateY = '-1000vh';
-                                duration = '3s';
-                            } else if ((x >= 28 &&  x < 29) && (y >= -110 && y < -109)) {
-                                console.log("정면 아래 파울");
-                                translateX = '0px';
-                                translateY = '200px';
-                            } else if ((x >= 28 &&  x < 29) && (y >= -80 && y < -79)) {
-                                console.log("오른쪽 아래 파울");
-                                translateX = '800px';
-                                translateY = '150px';
-                            } else if ((x >= 12 && x < 13) && (y >= -100 && y < -89)) {
-                                console.log("왼쪽 아래 파울");
-                                translateX = '-800px';
-                                translateY = '150px';
-                            }
-                            moveBall(translateX, translateY, duration);
-                        }
-
-                        // 노트북 배트 스윙 함수
-                        function NoteBook(x, y) {
-                            let translateX, translateY, duration = '1s';
-                            if (x === 50 && y === 50) {
-                                console.log("왼쪽 안타");
-                                translateX = '-700px';
-                                translateY = '-200px';
-                            } else if ((x >= 28 && x < 29) && (y >= -100 && y < -99)) {
-                                console.log("오른쪽 안타");
-                                translateX = '700px';
-                                translateY = '-200px';
-                            } else if ((x >= 26 && x < 27) && (y >= -100 && y < -99)) {
-                                console.log("오른쪽 파울");
-                                translateX = '1000px';
-                                translateY = '-100px';
-                            } else if ((x >= 22 && x < 23) && (y >= -100 && y < -99)) {
-                                console.log("왼쪽 파울");
-                                translateX = '-1000px';
-                                translateY = '-100px';
-                            } else if (x === 50 && (y >= 20 && y < 21)) {
-                                console.log("정면 홈런");
-                                translateX = '10px';
-                                translateY = '-1000vh';
-                                duration = '3s';
                             } else if ((x >= 22 && x < 23) && (y >= -110 && y < -109)) {
                                 console.log("왼쪽 홈런");
                                 translateX = '-800vh';
@@ -768,15 +658,21 @@
             <ul class="contextmenu menu">
               <li><a>파리채</a></li>
               <li><a>탁구채</a></li>
-              <li><a>키보드</a></li>
               <li><a>도깨비 배트</a></li>
               <li><a>나무배트</a></li>
               <li><a>야구 배트</a></li>
               <li><a>후라이팬</a></li>
               <li><a>테니스라켓</a></li>
               <li><a>골프채</a></li>
-              <li><a>노트북</a></li>
             </ul>
         </div>
     </div>
+{% endblock %}
+
+{% block user_point %}
+    {% if user_point %}
+        {{ user_point.user_point }}
+    {% else %}
+        0
+    {% endif %}
 {% endblock %}

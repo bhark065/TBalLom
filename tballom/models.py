@@ -10,6 +10,9 @@ class Point(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     user_point = models.IntegerField()
 
+    def __str__(self):
+        return self.user_point
+
 class Score(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     user_score = models.IntegerField()

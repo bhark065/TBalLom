@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
-from .models import User
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import User, Point
+
 
 # Create your views here.
 
@@ -20,5 +21,7 @@ def tballom_name_view(request):
         return redirect('tballom:tballom_game', pk=new_user.pk)
 
 def tballom_game_view(request, pk):
-    user = User.objects.get(pk=pk)
-    return render(request, 'html/tballom/tballom_game.html', {'user': user})
+    user = get_object_or_404(User, pk=pk)
+    user_id = request.user.id
+    user_point = Point.objects.filter(user_id=user_id).first()
+    return render(request, 'html/tballom/tballom_game.html', {'user': user, 'user_point': user_point})
