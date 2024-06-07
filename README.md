@@ -8,7 +8,7 @@
 - 구매 : 받은 포인트로 배트 구매 기능
 
 #### 🛠️사용언어/툴
-- Django/PyCharm
+- Django, HTML5, CSS3, JavaScript/PyCharm
 
 #### 👩‍💻개발자
 - 양가윤 : https://github.com/rkdbs
