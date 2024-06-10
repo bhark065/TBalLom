@@ -28,3 +28,6 @@ def tballom_game_view(request, pk):
 
 def tballom_store_view(request):
     return render(request, 'html/tballom/tballom_store.html')
+
+def tballom_rank_view(request):
+    return render(request, 'html/tballom/tballom_rank.html')
