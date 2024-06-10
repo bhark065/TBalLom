@@ -1,0 +1,25 @@
+#grid-container {
+    width: 866px;
+    height: 693px;
+    display: flex;
+    font-size: 20px;
+    margin-top: 123px;
+    position: absolute;
+    align-items: center;
+    border-radius: 40px;
+    flex-direction: column;
+    background-color: #FFF;
+    font-family: var(--pretendard-font);
+}
+
+#header {
+    display: flex;
+    margin-top: 65px;
+    column-gap: 104px;
+    align-items: center;
+}
+
+hr {
+    width: calc(100% - 100px);
+}
+

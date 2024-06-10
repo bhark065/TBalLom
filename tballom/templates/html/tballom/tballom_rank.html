@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Rank {% endblock %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tballom_rank.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="grid-container">
+        <div id="header">
+            <p>이름</p>
+            |
+            <p>점수</p>
+            |
+            <p>랭킹</p>
+        </div>
+        <hr style="border: 2px solid #000">
+    </div>
+{% endblock %}
