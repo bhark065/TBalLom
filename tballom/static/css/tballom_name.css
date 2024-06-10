@@ -15,6 +15,10 @@
     color: white;
 }
 
+.title > p {
+    padding-top: 6px;
+}
+
 .name-container > input {
     text-align: center;
     width: 23.5vw;
@@ -28,6 +32,16 @@
     font-size: 20px;
     color: var(--main-color);
 }
+
 .name-container > input::placeholder {
     color: rgba(0, 0, 0, 0.2);
+}
+
+button {
+    width: 40px;
+    font-size: 12px;
+    border-radius: 10px;
+    border: 1px solid #FFF;
+    margin: -20px 0 0 275px;
+    font-family: var(--pretendard-font);
 }

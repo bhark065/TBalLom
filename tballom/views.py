@@ -25,3 +25,6 @@ def tballom_game_view(request, pk):
     user_id = request.user.id
     user_point = Point.objects.filter(user_id=user_id).first()
     return render(request, 'html/tballom/tballom_game.html', {'user': user, 'user_point': user_point})
+
+def tballom_store_view(request):
+    return render(request, 'html/tballom/tballom_store.html')
