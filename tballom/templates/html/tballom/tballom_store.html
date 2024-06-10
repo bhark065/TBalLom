@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %} Store {% endblock %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tballom_store.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="grid-container">
+        <div class="box">
+            <div class="img">
+                <img src="{% static "tballom/images/파리채.png" %}">
+                <p class="name">파리채</p>
+            </div>
+            <p class="price">기본 제공</p>
+        </div>
+        <div class="box">
+            <div class="img">
+                <img src="{% static "tballom/images/탁구채.png" %}">
+                <p class="name">탁구채</p>
+            </div>
+            <p class="price">1</p>
+        </div>
+        <div class="box">
+            <div class="img">
+                <img src="{% static "tballom/images/장난감 배트.png" %}">
+                <p class="name">도깨비 배트</p>
+            </div>
+            <p class="price">5</p>
+        </div>
+        <div class="box">
+            <div class="img">
+                <img src="{% static "tballom/images/나무 배트.png" %}">
+                <p class="name">나무 배트</p>
+            </div>
+            <p class="price">13</p>
+        </div>
+        <div class="box">
+            <div class="img">
+                <img src="{% static "tballom/images/알루미늄 배트.png" %}">
+                <p class="name">야구 배트</p>
+            </div>
+            <p class="price">23</p>
+        </div>
+        <div class="box">
+            <div class="img">
+                <img src="{% static "tballom/images/후라이팬.png" %}">
+                <p class="name">후라이팬</p>
+            </div>
+            <p class="price">31</p>
+        </div>
+        <div class="box">
+            <div class="img">
+                <img src="{% static "tballom/images/테니스 라켓.png" %}">
+                <p class="name">테니스 라켓</p>
+            </div>
+            <p class="price">32</p>
+        </div>
+        <div class="box">
+            <div class="img">
+                <img src="{% static "tballom/images/골프채.png" %}">
+                <p class="name">골프채</p>
+            </div>
+            <p class="price">54</p>
+        </div>
+    </div>
+{% endblock %}
