@@ -15,6 +15,10 @@
     color: white;
 }
 
+.title > p {
+    padding-top: 6px;
+}
+
 .name-container > input {
     text-align: center;
     width: 23.5vw;
