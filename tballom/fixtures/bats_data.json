@@ -12,7 +12,7 @@
         "pk": 2,
         "fields": {
             "bat_name": "탁구채",
-            "bat_price": 0
+            "bat_price": 1
         }
     },
     {
@@ -20,7 +20,7 @@
         "pk": 3,
         "fields": {
             "bat_name": "도깨비 배트",
-            "bat_price": 0
+            "bat_price": 5
         }
     },
     {
@@ -28,7 +28,7 @@
         "pk": 4,
         "fields": {
             "bat_name": "나무 배트",
-            "bat_price": 0
+            "bat_price": 13
         }
     },
     {
@@ -36,7 +36,7 @@
         "pk": 5,
         "fields": {
             "bat_name": "야구 배트",
-            "bat_price": 0
+            "bat_price": 23
         }
     },
     {
@@ -44,7 +44,7 @@
         "pk": 6,
         "fields": {
             "bat_name": "후라이팬",
-            "bat_price": 0
+            "bat_price": 31
         }
     },
     {
@@ -52,7 +52,7 @@
         "pk": 7,
         "fields": {
             "bat_name": "테니스 라켓",
-            "bat_price": 0
+            "bat_price": 32
         }
     },
     {
@@ -60,7 +60,7 @@
         "pk": 8,
         "fields": {
             "bat_name": "골프채",
-            "bat_price": 0
+            "bat_price": 54
         }
     }
 ]
