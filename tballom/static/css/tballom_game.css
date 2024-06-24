@@ -193,13 +193,13 @@
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    color: var(--main-color);
 }
 
 .menu li a {
     font-size: 18px;
     text-decoration: none;
     font-family: var(--pretendard-font);
+    color: var(--main-color);
     font-weight: 500;
     transition: ease .2s;
     display: block;

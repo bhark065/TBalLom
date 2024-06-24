@@ -6,16 +6,22 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.user_name
+
 class Point(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_point = models.IntegerField()
+    user_point = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.user_point
+        return str(self.user_point)
 
 class Score(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_score = models.IntegerField()
+    user_score = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.user_score)
 
 class Bat(models.Model):
     bat_name = models.CharField(max_length=20)

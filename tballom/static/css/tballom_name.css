@@ -15,10 +15,6 @@
     color: white;
 }
 
-.title > p {
-    padding-top: 6px;
-}
-
 .name-container > input {
     text-align: center;
     width: 23.5vw;
@@ -44,4 +40,5 @@ button {
     border: 1px solid #FFF;
     margin: -20px 0 0 400px;
     font-family: var(--pretendard-font);
+    cursor: pointer;
 }

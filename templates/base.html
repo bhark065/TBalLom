@@ -13,21 +13,23 @@
         logo.addEventListener('click', function () {
             window.location.href = '/tballom/';
         });
+        movePage();
     });
 
     function movePage() {
+        const userId = {{ request.user.id | default:"null" }};
          // 이름 입력 안 하고 navItem 클릭 시
-        let game = document.getElementById('game');
+        let game = document.querySelector('#game');
         game.addEventListener('click', function () {
-            window.location.href = '/tballom/game/';
+            window.location.href = `/tballom/game/${userId}`;
         });
 
-        let rank = document.getElementById('rank');
+        let rank = document.querySelector('#rank');
         rank.addEventListener('click', function () {
             window.location.href = '/tballom/rank/';
         });
 
-        let store = document.getElementById('store');
+        let store = document.querySelector('#store');
         store.addEventListener('click', function () {
             window.location.href = '/tballom/store/';
         });
@@ -51,5 +53,6 @@
         {% block content %}
         {% endblock %}
     </div>
+    {% block jsLink %}{% endblock %}
 </body>
 </html>
