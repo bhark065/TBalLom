@@ -18,14 +18,14 @@ def tballom_name_view(request):
 
     if user:
         # 이미 존재하는 사용자 이름일 경우
-        return redirect('tballom:tballom_game', pk=user.pk)
+        return redirect('tballom:tballom_game_view')
     else:
         # 새로운 사용자 이름일 경우
         new_user = User.objects.create(user_name=user_name)
-        return redirect('tballom:tballom_game', pk=new_user.pk)
+        return redirect('tballom:tballom_game_view')
 
-def tballom_game_view(request, pk):
-    user = get_object_or_404(User, pk=pk)
+def tballom_game_view(request):
+    user = get_object_or_404(User)
     user_id = request.user.id
     user_point = Point.objects.filter(user_id=user_id).first()
     return render(request, 'html/tballom/tballom_game.html', {'user': user, 'user_point': user_point})

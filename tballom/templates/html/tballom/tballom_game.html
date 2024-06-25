@@ -31,14 +31,14 @@
         <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <div class="bat-toy"></div> <img src="{% static '/tballom/images/장난감 배트.png' %}" /> </div>
         <div>
             <ul class="contextmenu menu">
-              <li><a>파리채</a></li>
-              <li><a>탁구채</a></li>
-              <li><a>도깨비 배트</a></li>
-              <li><a>나무배트</a></li>
-              <li><a>야구 배트</a></li>
-              <li><a>후라이팬</a></li>
-              <li><a>테니스라켓</a></li>
-              <li><a>골프채</a></li>
+                <li><a>파리채</a></li>
+                <li><a>탁구채</a></li>
+                <li><a>도깨비 배트</a></li>
+                <li><a>나무배트</a></li>
+                <li><a>야구 배트</a></li>
+                <li><a>후라이팬</a></li>
+                <li><a>테니스라켓</a></li>
+                <li><a>골프채</a></li>
             </ul>
         </div>
     </div>
@@ -47,5 +47,7 @@
 {% block user_point %}
     {% if user_point %}
         {{ user_point.user_point }}
+    {% else %}
+        0
     {% endif %}
 {% endblock %}

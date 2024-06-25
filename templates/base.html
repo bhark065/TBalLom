@@ -17,11 +17,10 @@
     });
 
     function movePage() {
-        const userId = {{ request.user.id | default:"null" }};
          // 이름 입력 안 하고 navItem 클릭 시
         let game = document.querySelector('#game');
         game.addEventListener('click', function () {
-            window.location.href = `/tballom/game/${userId}`;
+            window.location.href = '/tballom/game/';
         });
 
         let rank = document.querySelector('#rank');

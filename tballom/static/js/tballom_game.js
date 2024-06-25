@@ -741,7 +741,7 @@ function saveScore() {
 }
 
 function savePoint() {
-     var xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     var url = '/tballom/save-point/';
     var data = {
         user_id: userId,
