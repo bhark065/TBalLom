@@ -7,8 +7,8 @@
 - 랭킹 : 얻은 점수로 랭킹 순위 보여주는 기능
 - 구매 : 받은 포인트로 배트 구매 기능
 
-#### 🛠️사용언어/툴
-- Django, HTML5, CSS3, JavaScript/PyCharm
+#### 🛠️사용언어 / 툴
+- Django, HTML5, CSS3, JavaScript / PyCharm
 
 #### 👩‍💻개발자
 - 양가윤 : https://github.com/rkdbs
