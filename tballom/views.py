@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from .models import User, Point, Score
+from .models import User, Point, Score, UserBat
 from django.http import JsonResponse
 
 
@@ -21,7 +21,9 @@ def tballom_name_view(request):
 def tballom_game_view(request):
     user = get_object_or_404(User, id=request.user.id)
     user_point = Point.objects.filter(user=user).first()
-    return render(request, 'html/tballom/tballom_game.html', {'user': user, 'user_point': user_point})
+
+    user_bat = UserBat.objects.filter(user=user)
+    return render(request, 'html/tballom/tballom_game.html', {'user': user, 'user_point': user_point, 'user_bat': user_bat})
 
 @csrf_exempt
 def save_score(request):
@@ -79,4 +81,12 @@ def tballom_store_view(request):
 
 def tballom_rank_view(request):
     users = User.objects.all()
-    return render(request, 'html/tballom/tballom_rank.html', {'users': users})
+    scores = Score.objects.all()
+    user_scores = []
+    for user, score in zip(users, scores):
+        user_scores.append({"name": user.user_name, "score": score.user_score}) # 출력 [{'name':'이름', 'score':80}]
+
+    user = get_object_or_404(User, id=request.user.id)
+    user_point = Point.objects.filter(user=user).first()
+
+    return render(request, 'html/tballom/tballom_rank.html', {'user_scores': user_scores, 'user_point': user_point})
