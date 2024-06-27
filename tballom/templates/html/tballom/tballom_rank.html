@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Rank {% endblock %}
+{% block title %}Rank{% endblock %}
 
 {% block css %}
     {% load static %}
@@ -17,5 +17,15 @@
             <p>랭킹</p>
         </div>
         <hr style="border: 2px solid #000">
+
+        <div id="body">
+            {% for user in users %}
+                <div class="list">
+                    <p class="name">{{ user.user_name }}</p>
+                    <p class="score"></p>
+                    <p class="ranking"></p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
