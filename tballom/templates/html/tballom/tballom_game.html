@@ -28,19 +28,17 @@
             <div class="ball-imgDiv"> <img src="{% static '/tballom/images/T-ballBall.png' %}" /> </div>
             <div class="game-imgDiv"> <img src="{% static '/tballom/images/T-ballStand.png' %}" /> </div>
         </div>
-        <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <div class="bat-toy"></div> <img src="{% static '/tballom/images/장난감 배트.png' %}" /> </div>
-        <div>
-            <ul class="contextmenu menu">
-                <li><a>파리채</a></li>
-                <li><a>탁구채</a></li>
-                <li><a>도깨비 배트</a></li>
-                <li><a>나무배트</a></li>
-                <li><a>야구 배트</a></li>
-                <li><a>후라이팬</a></li>
-                <li><a>테니스라켓</a></li>
-                <li><a>골프채</a></li>
-            </ul>
-        </div>
+        <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <div class="bat-flyswatter"></div> <img src="{% static '/tballom/images/파리채.png' %}" /> </div>
+        {% if user_bat %}
+            <div>
+                <ul class="contextmenu menu">
+                    {# for문으로 자신이 산 배트 보여지게 #}
+                    {% for bat in user_bat %}
+                        <li><a>{{ bat }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
