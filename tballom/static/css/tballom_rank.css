@@ -23,3 +23,21 @@ hr {
     width: calc(100% - 100px);
 }
 
+#body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list {
+    width: 766px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list p {
+    width: 255px;
+    text-align: center;
+}

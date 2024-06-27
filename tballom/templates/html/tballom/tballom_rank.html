@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Rank {% endblock %}
+{% block title %}Rank{% endblock %}
 
 {% block css %}
     {% load static %}
@@ -17,5 +17,15 @@
             <p>랭킹</p>
         </div>
         <hr style="border: 2px solid #000">
+
+        <div id="body">
+            {% for user in users %}
+                <div class="list" style="display: flex; align-items: center; justify-content: space-between; height: 65px; width: 766px;">
+                    <p style="text-align: center; width: 255px;">{{ user.user_name }}</p>
+                    <p style="text-align: center; width: 255px;"></p>
+                    <p style="text-align: center; width: 255px;">위</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
