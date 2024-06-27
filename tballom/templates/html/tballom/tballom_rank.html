@@ -20,10 +20,10 @@
 
         <div id="body">
             {% for user in users %}
-                <div class="list">
-                    <p class="name">{{ user.user_name }}</p>
-                    <p class="score"></p>
-                    <p class="ranking"></p>
+                <div class="list" style="display: flex; align-items: center; justify-content: space-between; height: 65px; width: 766px;">
+                    <p style="text-align: center; width: 255px;">{{ user.user_name }}</p>
+                    <p style="text-align: center; width: 255px;"></p>
+                    <p style="text-align: center; width: 255px;">위</p>
                 </div>
             {% endfor %}
         </div>
