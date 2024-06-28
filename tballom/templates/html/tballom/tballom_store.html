@@ -61,9 +61,17 @@
         <div class="box">
             <div class="img">
                 <img src="{% static "tballom/images/골프채.png" %}">
-                <p class="name">골프채</p>
+                <p class="name">골프채</p>3
             </div>
             <p class="price">54</p>
         </div>
     </div>
+{% endblock %}
+
+{% block user_point %}
+    {% if user_point %}
+        {{ user_point.user_point }}
+    {% else %}
+        0
+    {% endif %}
 {% endblock %}
