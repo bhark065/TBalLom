@@ -22,7 +22,6 @@ def tballom_name_view(request):
 def tballom_game_view(request):
     user = get_object_or_404(User, id=request.user.id)
     user_point = Point.objects.filter(user=user).first()
-
     user_bat = UserBat.objects.filter(user=user)
     return render(request, 'html/tballom/tballom_game.html', {'user': user, 'user_point': user_point, 'user_bat': user_bat})
 

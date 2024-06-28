@@ -37,7 +37,7 @@ class UserBat(models.Model):
     bat = models.ForeignKey(Bat, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.bat.bat_name
+        return f'{self.user.user_name}:{self.bat.bat_name}'
 
 @receiver(post_save, sender=User)
 def create_default_bat(sender, instance, created, **kwargs):
