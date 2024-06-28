@@ -16,6 +16,7 @@ def tballom_name_view(request):
         return redirect('tballom:tballom_game_view')
     else:
         new_user = User.objects.create(user_name=user_name)
+        request.user = new_user
         return redirect('tballom:tballom_game_view')
 
 def tballom_game_view(request):
