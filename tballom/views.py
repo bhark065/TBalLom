@@ -82,11 +82,18 @@ def tballom_store_view(request):
 def tballom_rank_view(request):
     users = User.objects.all()
     scores = Score.objects.all()
-    user_scores = []
-    for user, score in zip(users, scores):
-        user_scores.append({"name": user.user_name, "score": score.user_score}) # 출력 [{'name':'이름', 'score':80}]
+
+    user_scores = [
+        {"name": user.user_name, "score": score.user_score}
+        for user, score in zip(users, scores)
+    ]
+
+    sorted_user_scores = sorted(user_scores, key=lambda x: x['score'], reverse=True)
+
+    for idx, user_score in enumerate(sorted_user_scores, start=1):
+        user_score['rank'] = idx
 
     user = get_object_or_404(User, id=request.user.id)
     user_point = Point.objects.filter(user=user).first()
 
-    return render(request, 'html/tballom/tballom_rank.html', {'user_scores': user_scores, 'user_point': user_point})
+    return render(request, 'html/tballom/tballom_rank.html',{'user_scores': sorted_user_scores, 'user_point': user_point})

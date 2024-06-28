@@ -26,11 +26,11 @@ hr {
 #body {
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
 }
 
 .list {
-    width: 766px;
     height: 65px;
     display: flex;
     align-items: center;
