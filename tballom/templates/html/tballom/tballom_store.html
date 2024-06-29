@@ -7,7 +7,20 @@
     <link rel="stylesheet" href="{% static 'css/tballom_store.css' %}">
 {% endblock %}
 
+{% block js %}
+    <script>
+        const userId = {{ request.user.id | default:"null" }};
+        let user_point = {{ user_point.user_point | default:0 }};
+    </script>
+{% endblock %}
+
+{% block jsLink %}
+    {% load static %}
+    <script src="{% static 'js/tballom_store.js' %}"></script>
+{% endblock %}
+
 {% block content %}
+    <div id="alert"></div>
     <div id="grid-container">
         <div class="box">
             <div class="img">
@@ -61,7 +74,7 @@
         <div class="box">
             <div class="img">
                 <img src="{% static "tballom/images/골프채.png" %}">
-                <p class="name">골프채</p>3
+                <p class="name">골프채</p>
             </div>
             <p class="price">54</p>
         </div>

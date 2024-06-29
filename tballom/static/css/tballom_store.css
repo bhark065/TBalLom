@@ -1,16 +1,29 @@
 #grid-container {
-    width: 1102px;
-    height: 729px;
+    width: auto;
+    height: auto;
     display: grid;
+    column-gap: 90px;
+    row-gap: 100px;
     margin-top: 155px;
     position: absolute;
-    font-family: var(--pretendard-font);
     grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+}
+
+#alert {
+    width: 40%;
+    position: absolute;
+    height: auto;
+    z-index: 999;
+    top: 2%;
 }
 
 .box {
     width: 208px;
     height: 306px;
+    display: flex;
+    row-gap: 20px;
+    flex-direction: column;
 }
 
 .img {
@@ -31,7 +44,7 @@
 }
 
 .name {
-    font-size: 12px;
+    font-size: 14px;
     text-align: right;
     margin-right: 5px;
     font-weight: var(--Regular);
