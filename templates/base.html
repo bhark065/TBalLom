@@ -18,36 +18,36 @@
                 pointDiv.style.color = 'transparent';
             }
         }
+
+        var logo = document.getElementById('logo');
+        var game = document.querySelector('.game');
+        var rank = document.querySelector('.rank');
+        var store = document.querySelector('.store');
+        movePage();
+
+        function handleNavigationClick(event, path) {
+            event.preventDefault();
+            window.location.href = path;
+        }
+
+        function movePage() {
+            logo.addEventListener('click', function(event) {
+                handleNavigationClick(event, '/tballom/');
+            });
+
+            game.addEventListener('click', function(event) {
+                handleNavigationClick(event, '/tballom/game/');
+            });
+
+            rank.addEventListener('click', function(event) {
+                handleNavigationClick(event, '/tballom/rank/');
+            });
+
+            store.addEventListener('click', function(event) {
+                handleNavigationClick(event, '/tballom/store/');
+            });
+        }
     });
-
-    var logo = document.getElementById('logo');
-    var game = document.querySelector('.game');
-    var rank = document.querySelector('.rank');
-    var store = document.querySelector('.store');
-    movePage();
-
-    function handleNavigationClick(event, path) {
-        event.preventDefault();
-        window.location.href = path;
-    }
-
-    function movePage() {
-        logo.addEventListener('click', function(event) {
-            handleNavigationClick(event, '/tballom/');
-        });
-
-        game.addEventListener('click', function(event) {
-            handleNavigationClick(event, '/tballom/game/');
-        });
-
-        rank.addEventListener('click', function(event) {
-            handleNavigationClick(event, '/tballom/rank/');
-        });
-
-        store.addEventListener('click', function(event) {
-            handleNavigationClick(event, '/tballom/store/');
-        });
-    }
 </script>
 {% block js %} {% endblock %}
 <body>
