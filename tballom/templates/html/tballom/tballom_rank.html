@@ -8,24 +8,26 @@
 {% endblock %}
 
 {% block content %}
-    <div id="grid-container">
-        <div id="header">
-            <p>이름</p>
-            |
-            <p>점수</p>
-            |
-            <p>랭킹</p>
-        </div>
-        <hr>
+    <div class="grid-div">
+        <div id="grid-container">
+            <div id="header">
+                <p>이름</p>
+                |
+                <p>점수</p>
+                |
+                <p>랭킹</p>
+            </div>
+            <hr>
 
-        <div id="body">
-            {% for user_score in user_scores %}
-                <div class="list">
-                    <p>{{ user_score.name }}</p>
-                    <p>{{ user_score.score }}</p>
-                    <p>{{ user_score.rank }}위</p>
-                </div>
-            {% endfor %}
+            <div id="body">
+                {% for user_score in user_scores %}
+                    <div class="list">
+                        <p>{{ user_score.name }}</p>
+                        <p>{{ user_score.score }}</p>
+                        <p>{{ user_score.rank }}위</p>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
