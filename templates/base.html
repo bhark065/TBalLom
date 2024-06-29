@@ -4,46 +4,63 @@
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
     {% load static %}
+    <link rel="icon" href={% static 'tballom/images/logo.png' %}/>
     <link rel="stylesheet" href={% static 'css/base.css' %} type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     {% block css %} {% endblock %}
 </head>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        let logo = document.getElementById('logo');
-        logo.addEventListener('click', function () {
-            window.location.href = '/tballom/';
-        });
-        movePage();
+        let currentPath = window.location.pathname;
+        if (currentPath === '/tballom/') {
+            let pointDiv = document.querySelector('.point');
+            if (pointDiv) {
+                pointDiv.style.color = 'transparent';
+            }
+        }
     });
 
+    var logo = document.getElementById('logo');
+    var game = document.querySelector('.game');
+    var rank = document.querySelector('.rank');
+    var store = document.querySelector('.store');
+    movePage();
+
+    function handleNavigationClick(event, path) {
+        event.preventDefault();
+        window.location.href = path;
+    }
+
     function movePage() {
-         // 이름 입력 안 하고 navItem 클릭 시
-        let game = document.querySelector('#game');
-        game.addEventListener('click', function () {
-            window.location.href = '/tballom/game/';
+        logo.addEventListener('click', function(event) {
+            handleNavigationClick(event, '/tballom/');
         });
 
-        let rank = document.querySelector('#rank');
-        rank.addEventListener('click', function () {
-            window.location.href = '/tballom/rank/';
+        game.addEventListener('click', function(event) {
+            handleNavigationClick(event, '/tballom/game/');
         });
 
-        let store = document.querySelector('#store');
-        store.addEventListener('click', function () {
-            window.location.href = '/tballom/store/';
+        rank.addEventListener('click', function(event) {
+            handleNavigationClick(event, '/tballom/rank/');
+        });
+
+        store.addEventListener('click', function(event) {
+            handleNavigationClick(event, '/tballom/store/');
         });
     }
 </script>
 {% block js %} {% endblock %}
 <body>
-    <div class="container" id="container">
+    <div class="main-container" id="main-container">
         <img src="{% static 'tballom/images/background.png' %}" alt="background" id="background">
         <nav>
-            <div class="imgDiv" id="logo"> <img src="{% static 'tballom/images/logo.png' %}" alt="logo"> </div>
+            <div class="imgDiv" id="logo">
+                <img src="{% static 'tballom/images/logo.png' %}" alt="logo">
+            </div>
             <div class="nav-item">
-                <p id="game">GAME</p>
-                <p id="rank">RANK</p>
-                <p id="store">STORE</p>
+                <p id="logo" class="game">GAME</p>
+                <p id="logo" class="rank">RANK</p>
+                <p id="logo" class="store">STORE</p>
             </div>
             <div class="point">
                 <p>POINT : {% block user_point %} {% endblock %}</p>

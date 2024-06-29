@@ -1,8 +1,7 @@
 @import url('https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css');
 
 :root {
-    --pretendard-font: 'Pretendard';
-
+    --Regular: 400;
     --Medium: 500;
     --Bold: 700;
 
@@ -14,48 +13,53 @@ body {
     margin: 0;
 }
 
-.container {
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard', serif;
+}
+
+.main-container {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
-    margin: 0;
 }
 
-.container > img {
+.main-container > img {
     width: 100%;
     height: 100%;
 }
 
 .imgDiv {
-    width: 66px;
+    width: 72px;
     height: 72px;
-    padding-top: 6px;
-    padding-left: 24px;
+    margin-left: 24px;
     cursor: pointer;
 }
 .imgDiv > img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
 }
 
-.container > nav {
+.main-container > nav {
     width: 100%;
     display: flex;
     align-items: center;
     position: fixed;
-    top: 0;
+    top: 1%;
     left: 0;
     z-index: 100;
     background-color: transparent;
-    column-gap: 670px;
+    justify-content: space-between;
 }
 
 .nav-item {
     display: flex;
+    width: auto;
     column-gap: 105px;
 
-    font-family: var(--pretendard-font);
     font-weight: var(--Bold);
     font-size: 18px;
     color: var(--main-color);
@@ -65,8 +69,8 @@ body {
 }
 
 .point {
-    font-family: var(--pretendard-font);
     font-weight: var(--Bold);
     font-size: 18px;
     color: var(--main-color);
+    margin-right: 24px;
 }
