@@ -265,7 +265,7 @@ document.addEventListener('keydown', function(event) {
                     swingingResult = "안타";
                     translateX = '700px';
                     translateY = '-200px';
-                } else if (((x >= 30 && x < 31) || (x >= 20 && x < 21)) && (y >= -58 && y < -47)) {
+                } else if (((x >= 30 && x < 31) || (x >= 20 && x < 21)) && (y >= -78 && y < -47)) {
                     score += -37;
                     console.log("오른쪽 파울");
                     swingingResult = "파울";
