@@ -10,15 +10,13 @@
 {% block js %}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var currentUserID = "{{ request.user.id }}";  // 현재 로그인한 사용자의 ID
-
-            var userScores = document.querySelectorAll('.list');  // 모든 사용자 목록을 가져옴
+            const currentUserID = {{ request.session.user_id }};
+            var userScores = document.querySelectorAll('.list');
 
             userScores.forEach(function(userScore) {
-                var userID = userScore.getAttribute('id').split('-')[2];  // 각 사용자의 ID를 가져옴
-
-                if (userID === currentUserID) {
-                    userScore.classList.add('currentUser');  // ID가 일치하면 클래스를 추가
+                var userID = userScore.getAttribute('id').split('-')[2];
+                if (parseInt(userID) === currentUserID) {
+                    userScore.classList.add('currentUser');
                 }
             });
         });
