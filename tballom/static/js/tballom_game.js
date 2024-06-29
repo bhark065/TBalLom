@@ -3,6 +3,7 @@ var rank = document.querySelector('.rank');
 var store = document.querySelector('.store');
 var logo = document.getElementById("logo");
 var nav = document.querySelector('nav');
+var gameStateDiv = document.getElementById('result');
 let background = document.getElementById("background");
 let gameContainer = document.querySelector('.game-container');
 
@@ -38,7 +39,7 @@ document.querySelectorAll('.contextmenu.menu li').forEach(item => {
         } else if (selectedOption === '도깨비 배트') {
             let imagePath = '/static/tballom/images/장난감 배트.png';
             changeBatImage(imagePath);
-        } else if (selectedOption === '나무배트') {
+        } else if (selectedOption === '나무 배트') {
             let imagePath = '/static/tballom/images/나무 배트.png';
             changeBatImage(imagePath);
         } else if (selectedOption === '야구 배트') {
@@ -47,7 +48,7 @@ document.querySelectorAll('.contextmenu.menu li').forEach(item => {
         } else if (selectedOption === '후라이팬') {
             let imagePath = '/static/tballom/images/후라이팬.png';
             changeBatImage(imagePath);
-        } else if (selectedOption === '테니스라켓') {
+        } else if (selectedOption === '테니스 라켓') {
             let imagePath = '/static/tballom/images/테니스 라켓.png';
             changeBatImage(imagePath);
         } else if (selectedOption === '골프채') {
@@ -117,8 +118,11 @@ function showResult() {
     }
 }
 
+let gameState = localStorage.getItem("gameState");
+
 function startGame() {
     localStorage.removeItem("gameState");
+    gameStateDiv.style.display = 'none';
     gameContainer.style.display = 'block';
     background.style.filter = 'brightness(100%)';
     nav.style.filter = 'brightness(100%)';
@@ -132,7 +136,9 @@ function startGame() {
 function endGame() {
     console.log("endGame 실행");
     // 게임 종료 시 화면에 메시지 표시
-    localStorage.setItem("gameState", false);
+    localStorage.setItem("gameState", "false");
+    gameStateDiv.innerHTML = '<p class="gameText">게임종료</p>';
+    gameStateDiv.style.display = 'flex';
 
     gameContainer.style.display = 'none';
     background.style.filter = 'brightness(0.5)';
@@ -146,7 +152,6 @@ function endGame() {
 }
 
 function nextPage() {
-    console.log("nextPage 실행");
     setTimeout(function() {
         // 로컬스토리지에 저장된 값들 다 지우기
         localStorage.clear();
@@ -157,7 +162,8 @@ function nextPage() {
 // 전광판에 게임시작 글씨 추가
 // 2초 후 배트 보여지기 => startGame 호출
 localStorage.clear();
-localStorage.setItem("gameState", true);
+localStorage.setItem("gameState", "true");
+gameStateDiv.innerHTML = '<p class="gameText">게임시작</p>';
 setTimeout(function () {
     startGame();
 }, 1500);
@@ -247,66 +253,66 @@ document.addEventListener('keydown', function(event) {
             // 파리채 배트 스윙 함수 (완성)
             function Flyswatter(x, y) {
                 let translateX, translateY, duration = '1s';
-                if (x === 50 && (y >= -68 && y < -67)) {
+                if ((x >= 50 && x < 51)  && (y > -68 && y <= -57)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("왼쪽 안타");
                     swingingResult = "안타";
                     translateX = '-700px';
                     translateY = '-200px';
-                } else if ((x >= 38 && x <= 40) && (y >= -48 && y < -47)) {
+                } else if ((x >= 40 && x <= 41) && (y > -68 && y <= -47)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("오른쪽 안타");
                     swingingResult = "안타";
                     translateX = '700px';
                     translateY = '-200px';
-                } else if ((x === 30 || x === 20) && (y >= -58 && y < -47)) {
+                } else if (((x >= 30 && x < 31) || (x >= 20 && x < 21)) && (y >= -58 && y < -47)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 파울");
                     swingingResult = "파울";
                     translateX = '1000px';
                     translateY = '-100px';
-                } else if ((x >= 40 && x < 41) || x === 50 && (y >= -48 && y < -47)) {
+                } else if (((x >= 40 && x < 41) || x === 50) && (y >= -48 && y < -47)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 파울");
                     swingingResult = "파울";
                     translateX = '-1000px';
                     translateY = '-100px';
-                } else if (x === 50 && (y > -58 && y <= -57)) {
+                } else if ((x >= 50 && x < 51) && (y > -58 && y <= -57)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("정면 홈런");
                     swingingResult = "홈런";
                     translateX = '10px';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && (y > -78 && y <= -77)) {
+                } else if ((x >= 50 && x < 51)  && (y > -88 && y <= -77)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("왼쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '-800vh';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 30 && (y > -58 && y <= -57)) {
+                } else if ((x >= 30 && x < 31) && (y > -68 && y <= -57)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("오른쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if (x === 50 && (y > -29 && y <= -27)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("정면 아래 파울");
                     swingingResult = "파울";
                     translateX = '0px';
                     translateY = '200px';
-                } else if ((x >= 40 && x < 41) && (y > -28 && y <= -27)) {
+                } else if (((x >= 40 && x < 41) || x >= 30 && x < 31) && ((y > -28 && y <= -27) || (y > -38 && y <= -37))) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '800px';
                     translateY = '150px';
-                } else if (x === 50 && (y >= -38 && y < -37)) {
+                } else if (x === 50 && (y > -38 && y <= -37)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '-800px';
                     translateY = '150px';
@@ -323,64 +329,64 @@ document.addEventListener('keydown', function(event) {
                 let translateX, translateY, duration = '1s';
                 if (x === 50 && (y >= 42 && y <= 43)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("왼쪽 안타");
                     swingingResult = "안타";
                     translateX = '-700px';
                     translateY = '-200px';
                 } else if (x === 50 && (y >= 32 && y <= 33)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("오른쪽 안타");
                     swingingResult = "안타";
                     translateX = '700px';
                     translateY = '-200px';
                 } else if ((x >= 43 && x < 50) && (y >= 19 && y < 50)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 파울");
                     swingingResult = "파울";
                     translateX = '1000px';
                     translateY = '-100px';
                 } else if ((x >= 41 && x < 42) && (y >= 29 && y < 40)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 파울");
                     swingingResult = "파울";
                     translateX = '-1000px';
                     translateY = '-100px';
-                } else if (x === 50 && (y >= 29 && y < 30)) {
+                } else if ((x >= 50 && x < 51) && (y >= 29 && y < 30)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("정면 홈런");
                     swingingResult = "홈런";
                     translateX = '10px';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && (y >= 19 && y < 20)) {
+                } else if ((x >= 50 && x < 51) && (y >= 19 && y < 20)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("왼쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '-800vh';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && (y >= 29 && y < 30)) {
+                } else if ((x >= 50 && x < 51) && (y >= 29 && y < 30)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("오른쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '800vh';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && ((y >= 39 && y <= 40) || (y >= 9 && y < 10))) {
+                } else if ((x >= 50 && x < 51) && ((y >= 39 && y <= 40) || (y >= 9 && y < 10))) {
                     score += -37;
-                    console.log("파울");
+                    console.log("정면 아래 파울");
                     swingingResult = "파울";
                     translateX = '0px';
                     translateY = '200px';
-                } else if (x === 50 && (y >= 50 && y < 51)) {
+                } else if ((x >= 50 && x < 51) && (y >= 49 && y < 51)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '800px';
                     translateY = '150px';
                 } else if ((x >= 41 && x < 42) && (y >= 49 && y < 50)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '-800px';
                     translateY = '150px';
@@ -395,66 +401,66 @@ document.addEventListener('keydown', function(event) {
             // 나무 배트 스윙 함수 (완성)
             function Wood(x, y) {
                 let translateX, translateY, duration = '1s';
-                if (x === 50 && (y > -37 && y <= -36)) {
+                if ((x >= 50 && x < 51) && (y > -37 && y <= -36)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("왼쪽 안타");
                     swingingResult = "안타";
                     translateX = '-700px';
                     translateY = '-200px';
                 } else if ((x >= 25 && x < 26) && (y > -57 && y <= -56)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("오른쪽 안타");
                     swingingResult = "안타";
                     translateX = '700px';
                     translateY = '-200px';
                 } else if ((x >= 16 && x < 17) && (y > -57 && y <= -56)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 파울");
                     swingingResult = "파울";
                     translateX = '1000px';
                     translateY = '-100px';
-                } else if (x === 50 && (y > -27 && y <= -24)) {
+                } else if ((x >= 50 && x < 51) && (y > -27 && y <= -24)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 파울");
                     swingingResult = "파울";
                     translateX = '-1000px';
                     translateY = '-100px';
                 } else if ((x >= 45 && x < 46) && (y > -27 && y <= -26)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("정면 홈런");
                     swingingResult = "홈런";
                     translateX = '10px';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if ((x >= 45 && x < 46) && (y > -37 && y <= -36)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("왼쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '-800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if ((x >= 25 && x < 26) && (y > -47 && y <= -46)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("오른쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if ((x >= 45 && x < 46) && (y > -17 && y <= -16)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("정면 아래 파울");
                     swingingResult = "파울";
                     translateX = '0px';
                     translateY = '200px';
-                } else if ((x >= 25 && x < 26) && (y > -37 && y <= -36)) {
+                } else if (((x >= 25 && x < 26) || (x >= 35 && x < 36)) && ((y > -37 && y <= -36) || (y > -27 && y <= -26))) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '800px';
                     translateY = '150px';
                 } else if (x === 50 && (y > -25 && y <= -4)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '-800px';
                     translateY = '150px';
@@ -471,64 +477,64 @@ document.addEventListener('keydown', function(event) {
                 let translateX, translateY, duration = '1s';
                 if ((x >= 46 && x < 47) && (y >= 20 && y < 21)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("왼쪽 안타");
                     swingingResult = "안타";
                     translateX = '-700px';
                     translateY = '-200px';
                 } else if ((x >= 49 && x < 51) && (y >= 42 && y < 43)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("오른쪽 안타");;
                     swingingResult = "안타";
                     translateX = '700px';
                     translateY = '-200px';
                 } else if ((x >= 39 && x < 40) && (y >= 30 && y < 31)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 파울");
                     swingingResult = "파울";
                     translateX = '1000px';
                     translateY = '-100px';
                 } else if ((x >= 36 && x < 37) && (y >= 20 && y < 21)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 파울");
                     swingingResult = "파울";
                     translateX = '-1000px';
                     translateY = '-100px';
                 } else if (x === 50 && (y >= 20 && y < 21)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("정면 홈런");
                     swingingResult = "홈런";
                     translateX = '10px';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if (x === 50 && (y >= 30 && y < 31)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("왼쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '-800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if (x === 50 && (y >= 40 && y < 41)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("오른쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if (x === 50 && (y >= 10 && y < 11)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("정면 아래 파울");
                     swingingResult = "파울";
                     translateX = '0px';
                     translateY = '200px';
                 } else if (x === 50 && y === 50) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '800px';
                     translateY = '150px';
                 } else if ((x >= 46 && x < 47) && y === 50) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '-800px';
                     translateY = '150px';
@@ -543,66 +549,66 @@ document.addEventListener('keydown', function(event) {
             // 장난감 배트 스윙 함수 (완성)
             function Toy(x, y) {
                 let translateX, translateY, duration = '1s';
-                if (x === 50 && ((y >= 12 && y < 13) || (y >= 32 && y < 33))) {
+                if ((x >= 50 && x < 51) && ((y >= 12 && y < 13) || (y >= 32 && y < 43))) {
                     score += 29;
-                    console.log("안타");
+                    console.log("왼쪽 안타");
                     swingingResult = "안타";
                     translateX = '-700px';
                     translateY = '-200px';
                 } else if ((x >= 47 && x < 48) && (y >= 23 && y < 43)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("오른쪽 안타");
                     swingingResult = "안타";
                     translateX = '700px';
                     translateY = '-200px';
                 } else if ((x >= 37 && x < 38) && (y >= 22 && y < 43)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 파울");
                     swingingResult = "파울";
                     translateX = '1000px';
                     translateY = '-100px';
                 } else if ((x >= 42 && x < 43) && (y >= 32 && y < 33)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 파울");
                     swingingResult = "파울";
                     translateX = '-1000px';
                     translateY = '-100px';
-                } else if (x === 50 && (y >= 35 && y < 36)) {
+                } else if ((x >= 50 && x < 51) && (y >= 35 && y < 36)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("정면 홈런");
                     swingingResult = "홈런";
                     translateX = '10px';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && (y >= 22 && y < 23)) {
+                } else if ((x >= 50 && x < 51) && (y >= 22 && y < 23)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("왼쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '-800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if ((x >= 47 && x < 48) && (y >= 22 && y < 23)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("오른쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '800vh';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && ((y >= 10 && y < 11) || y === 50)) {
+                } else if ((x >= 50 && x < 51) && ((y >= 10 && y < 11) || (y >= 50 && y < 51))) {
                     score += -37;
-                    console.log("파울");
+                    console.log("정면 아래 파울");
                     swingingResult = "파울";
                     translateX = '0px';
                     translateY = '200px';
-                } else if ((x >= 37 && x < 48) && y === 50) {
+                } else if ((x >= 37 && x < 48) && (y >= 50 && y < 51)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '800px';
                     translateY = '150px';
-                } else if ((x >= 46 && x < 47) && y === 50) {
+                } else if ((x >= 46 && x < 47) && (y >= 50 && y < 51)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '-800px';
                     translateY = '150px';
@@ -618,57 +624,57 @@ document.addEventListener('keydown', function(event) {
                 let translateX, translateY, duration = '1s';
                 if ((x >= 22 && x < 23) && (y >= -90 && y < -89)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("왼쪽 안타");
                     swingingResult = "안타";
                     translateX = '-700px';
                     translateY = '-200px';
                 } else if ((x >= 28 && x < 29) && (y >= -100 && y < -99)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("오른쪽 안타");
                     swingingResult = "안타";
                     translateX = '700px';
                     translateY = '-200px';
                 } else if ((x >= 26 && x < 27) && (y >= -100 && y < -99)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 파울");
                     swingingResult = "파울";
                     translateX = '1000px';
                     translateY = '-100px';
                 } else if ((x >= 22 && x < 23) && (y >= -100 && y < -99)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 파울");
                     swingingResult = "파울";
                     translateX = '-1000px';
                     translateY = '-100px';
                 } else if ((x >= 22 && x < 23) && (y >= -110 && y < -109)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("왼쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '-800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if ((x >= 28 && x < 29) && (y >= -90 && y < -89)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("오른쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if ((x >= 28 &&  x < 29) && (y >= -110 && y < -109)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("정면 아래 파울");
                     swingingResult = "파울";
                     translateX = '0px';
                     translateY = '200px';
                 } else if ((x >= 28 &&  x < 29) && (y >= -80 && y < -79)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '800px';
                     translateY = '150px';
                 } else if ((x >= 12 && x < 13) && (y >= -100 && y < -89)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '-800px';
                     translateY = '150px';
@@ -685,64 +691,64 @@ document.addEventListener('keydown', function(event) {
                 let translateX, translateY, duration = '1s';
                 if ((x <= 50 && x > 43) && ((y >= 5 && y < 6) || (y >= -15 && y < -14))) {
                     score += 29;
-                    console.log("안타");
+                    console.log("왼쪽 안타");
                     swingingResult = "안타";
                     translateX = '-700px';
                     translateY = '-200px';
-                } else if ((x >= 45 && x < 46) && (y >= -5 && y < -4)) {
+                } else if ((x >= 35 && x < 46) && (y >= -5 && y < -4)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("오른쪽 안타");
                     swingingResult = "안타";
                     translateX = '700px';
                     translateY = '-200px';
-                } else if ((x >= 35 && x < 46)  && ((y >= 5 && y < 6) || (y >= 15 && y < 16))) {
+                } else if ((x >= 35 && x < 46)  && ((y >= 5 && y < 6))) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 파울");
                     swingingResult = "파울";
                     translateX = '1000px';
                     translateY = '-100px';
-                } else if ((x >= 43 && x < 44) && (y >= -5 && y < -4)) {
+                } else if ((x >= 43 && x < 44) && (y >= -5 && y < -4) || (y >= 15 && y < 16)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 파울");
                     swingingResult = "파울";
                     translateX = '-1000px';
                     translateY = '-100px';
-                } else if (x === 50 && (y >= -15 && y < -14)) {
+                } else if ((x >= 50 && x < 51) && (y >= -15 && y < -14)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("정면 홈런");;
                     swingingResult = "홈런";
                     translateX = '10px';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && (y >= -5 && y < -4)) {
+                } else if ((x >= 50 && x < 51) && (y >= -5 && y < -4)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("왼쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '-800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if ((x >= 45 && x < 46) && (y >= -15 && y < -14)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("오른쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '800vh';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && (y >= 25 && y < 26)) {
+                } else if ((x >= 50 && x < 51) && (y >= 25 && y < 36)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("정면 아래 파울");
                     swingingResult = "파울";
                     translateX = '0px';
                     translateY = '200px';
-                } else if (x === 50 && (y >= 15 && y < 16)) {
+                } else if (((x >= 45 && x < 51)) && (y >= 15 && y < 26)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '800px';
                     translateY = '150px';
-                } else if ((x >= 43 && x < 44) && (y >= 5 && y < 6)) {
+                } else if ((x >= 33 && x < 44) && ((y >= 5 && y < 6) || (y >= 25 && y < 36))) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '-800px';
                     translateY = '150px';
@@ -757,66 +763,66 @@ document.addEventListener('keydown', function(event) {
             // 알루미늄 배트 스윙 함수 (완성)
             function Al(x, y) {
                 let translateX, translateY, duration = '1s';
-                if (x === 50 && (y >= -25 && y < -24)) {
+                if ((x >= 50 && x < 51) && (y >= -25 && y < -24)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("왼쪽 안타");
                     swingingResult = "안타";
                     translateX = '-700px';
                     translateY = '-200px';
                 } else if ((x >= 47 && x < 48) && (y >= -25 && y < -24)) {
                     score += 29;
-                    console.log("안타");
+                    console.log("오른쪽 안타");
                     swingingResult = "안타";
                     translateX = '700px';
                     translateY = '-200px';
                 } else if ((x >= 37 && x < 38)  &&  (y >= -35 && y < -24)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 파울");
                     swingingResult = "파울";
                     translateX = '1000px';
                     translateY = '-100px';
-                } else if (x === 50 && (y >= -35 && y < -34)) {
+                } else if ((x >= 50 && x < 51) && (y >= -35 && y < -34)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 파울");
                     swingingResult = "파울";
                     translateX = '-1000px';
                     translateY = '-100px';
                 } else if ((x >= 47 && x < 48) && (y >= -35 && y < -34)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("정면 홈런");
                     swingingResult = "홈런";
                     translateX = '10px';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && (y >= -15 && y < -14)) {
+                } else if ((x >= 50 && x < 51) && (y >= -15 && y < -14)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("왼쪽 홈런");
                     swingingResult = "홈런";
                     translateX = '-800vh';
                     translateY = '-1000vh';
                     duration = '3s';
                 } else if ((x >= 37 && x < 38) && (y >= -45 && y < -44)) {
                     score += 51;
-                    console.log("홈런");
+                    console.log("오른쪽 홈런");;
                     swingingResult = "홈런";
                     translateX = '800vh';
                     translateY = '-1000vh';
                     duration = '3s';
-                } else if (x === 50 && (y >= 5 && y < 6)) {
+                } else if ((x >= 50 && x < 51) && (y >= 5 && y < 6)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("정면 아래 파울");
                     swingingResult = "파울";
                     translateX = '0px';
                     translateY = '200px';
-                } else if ((x >= 47 && x < 48) && (y >= -15 && y < -14)) {
+                } else if ((x >= 47 && x < 48) && (y >= -15 && y < -4)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("오른쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '800px';
                     translateY = '150px';
-                } else if (x === 50 && (y >= -5 && y < -4)) {
+                } else if ((x >= 50 && x < 51) && (y >= -5 && y < -4)) {
                     score += -37;
-                    console.log("파울");
+                    console.log("왼쪽 아래 파울");
                     swingingResult = "파울";
                     translateX = '-800px';
                     translateY = '150px';

@@ -9,18 +9,7 @@
 
 {% block js %}
     <script>
-        const userId = {{ request.user.id | default:"null" }};
-        let gameState = localStorage.getItem("gameState");
-        let gameStateDiv = document.getElementById('result');
-
-        if (gameState) {
-            if (gameState === true) {
-                gameStateDiv.innerHTML = '<p class="gameText">게임시작</p>';
-            } else if (gameState === false) {
-                gameStateDiv.innerHTML = '<p class="gameText">게임종료</p>';
-            }
-        }
-
+        const userId = {{ request.session.user_id }};
     </script>
 {% endblock %}
 
