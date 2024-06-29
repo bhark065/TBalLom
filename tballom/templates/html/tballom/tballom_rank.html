@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="{% static 'css/tballom_rank.css' %}">
 {% endblock %}
 
+{% block js %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentUserID = "{{ request.user.id }}";  // 현재 로그인한 사용자의 ID
+
+            var userScores = document.querySelectorAll('.list');  // 모든 사용자 목록을 가져옴
+
+            userScores.forEach(function(userScore) {
+                var userID = userScore.getAttribute('id').split('-')[2];  // 각 사용자의 ID를 가져옴
+
+                if (userID === currentUserID) {
+                    userScore.classList.add('currentUser');  // ID가 일치하면 클래스를 추가
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
     <div class="grid-div">
         <div id="grid-container">
@@ -21,7 +39,7 @@
 
             <div id="body">
                 {% for user_score in user_scores %}
-                    <div class="list">
+                    <div class="list" id="user-score-{{ user_score.userId }}">
                         <p>{{ user_score.name }}</p>
                         <p>{{ user_score.score }}</p>
                         <p>{{ user_score.rank }}위</p>
