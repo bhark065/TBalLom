@@ -23,7 +23,7 @@ class Score(models.Model):
     user_score = models.IntegerField(default=0)
 
     def __str__(self):
-        return str(self.user_score)
+        return f'{self.user} : {str(self.user_score)}'
 
 class Bat(models.Model):
     bat_name = models.CharField(max_length=20)

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from .models import User, Point, Score, UserBat
+from .models import User, Point, Score, UserBat, Bat
 from django.http import JsonResponse
 
 
@@ -76,15 +76,38 @@ def save_point(request):
     else:
         return JsonResponse({'status': '잘못된 요청'}, status=400)
 
+@csrf_exempt
+def buying_bat(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            user_id = data.get('user_id')
+            bat_point = data.get('bat_point')
+
+            user = User.objects.get(id=user_id)
+            point, created = Point.objects.get_or_create(user=user, defaults={'user_point': 0})
+
+            # 구매한 배트 정보 저장
+            bat_name = data.get('bat_name')
+            bat = Bat.objects.get(bat_name=bat_name)
+            if UserBat.objects.filter(user=user, bat=bat).exists():
+                return JsonResponse({'status': '이미 구매한 배트입니다.'}, status=400)
+            else:
+                user_bat = UserBat.objects.create(user=user, bat=bat)
+                point.user_point -= bat_point
+                point.save()
+
+            return JsonResponse({'status': '저장 완료'}, status=200)
+        except User.DoesNotExist:
+            return JsonResponse({'status': '사용자를 찾을 수 없습니다'}, status=404)
+        except ValueError:
+            return JsonResponse({'status': '잘못된 데이터 형식'}, status=400)
+        except Exception as e:
+            return JsonResponse({'status': '서버 오류', 'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'status': '잘못된 요청'}, status=400)
+
 def tballom_store_view(request):
-    users = User.objects.all()
-    scores = Score.objects.all()
-
-    user_scores = [
-        {"name": user.user_name, "score": score.user_score}
-        for user, score in zip(users, scores)
-    ]
-
     user = get_object_or_404(User, id=request.user.id)
     user_point = Point.objects.filter(user=user).first()
 
@@ -94,6 +117,8 @@ def tballom_rank_view(request):
     users = User.objects.all()
     scores = Score.objects.all()
 
+    # 리스트 컴프리헨션 : 리스트를 쉽게, 짧게 한 줄로 만들 수 있는 파이썬 문법
+    # 리스트를 쉽게 만들면서 동시에 리스트를 반환함.
     user_scores = [
         {"name": user.user_name, "score": score.user_score}
         for user, score in zip(users, scores)
