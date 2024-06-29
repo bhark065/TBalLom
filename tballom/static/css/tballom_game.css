@@ -12,7 +12,6 @@
     border: 0;
     background-color: white;
 
-    font-family: var(--pretendard-font);
     font-weight: var(--Bold);
     font-size: 22px;
     color: var(--main-color);
@@ -47,6 +46,8 @@
     height: 50px;
     border-radius: 100%;
     margin-bottom: -2%;
+    top: 67%;
+    left: 37%;
 }
 .ball-imgDiv > img {
     width: 100%;
@@ -158,6 +159,7 @@
 /* 우클릭 시 생기는 메뉴바 */
 .menu {
     width: auto;
+    height: auto;
     max-height: 200px;
     display: flex;
     left: 835px;
@@ -184,8 +186,8 @@
 
 .menu li {
     display: flex;
-    width: 85px;
-    height: 30px;
+    width: 100%;
+    height: 100%;
     padding: 7px 26px;
     border-left: 3px solid transparent;
     border-radius: 5px;
@@ -198,7 +200,6 @@
 .menu li a {
     font-size: 18px;
     text-decoration: none;
-    font-family: var(--pretendard-font);
     color: var(--main-color);
     font-weight: 500;
     transition: ease .2s;
@@ -207,4 +208,66 @@
 
 .menu li:hover {
     background-color: rgba(1,32,99,0.2);
+}
+
+#gameResult {
+    display: flex;
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 39%;
+    top: 21%;
+    color: var(--main-color);
+    column-gap: 95px;
+}
+
+#todayResult {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+#todayResult > p:nth-child(1) {
+    font-size: 20px;
+    font-weight: var(--Bold);
+}
+
+#swingingResult {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+#swingingResult > p:nth-child(2),
+#swingingResult > p:nth-child(3),
+#swingingResult > p:nth-child(4) {
+    font-weight: var(--Medium);
+    font-size: 16px;
+}
+
+#currentResult {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#currentResult > p {
+    font-size: 40px;
+    font-weight: var(--Bold);
+}
+
+#result {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameText {
+    font-weight: var(--Bold);
+    font-size: 40px;
+    text-align: center;
+    color: white;
 }

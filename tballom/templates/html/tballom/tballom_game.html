@@ -10,6 +10,17 @@
 {% block js %}
     <script>
         const userId = {{ request.user.id | default:"null" }};
+        let gameState = localStorage.getItem("gameState");
+        let gameStateDiv = document.getElementById('result');
+
+        if (gameState) {
+            if (gameState === true) {
+                gameStateDiv.innerHTML = '<p class="gameText">게임시작</p>';
+            } else if (gameState === false) {
+                gameStateDiv.innerHTML = '<p class="gameText">게임종료</p>';
+            }
+        }
+
     </script>
 {% endblock %}
 
@@ -19,10 +30,15 @@
 {% endblock %}
 
 {% block content %}
-    <div class="button-container">
-        <button id="start-button">게임시작</button>
-        <p id='endMessage' style="font-family: var(--pretendard-font); font-weight: var(--Bold); font-size: 50px; color: white;">게임종료</p>
+    <div id="gameResult">
+        <div id="todayResult">
+            <p>오늘의 기록</p>
+            <div id="swingingResult"></div>
+        </div>
+
+        <div id="currentResult"></div>
     </div>
+    <div id="result"></div>
     <div class="game-container" style="display: none;">
         <div class="game-imgDiv-container">
             <div class="ball-imgDiv"> <img src="{% static '/tballom/images/T-ballBall.png' %}" /> </div>
@@ -31,10 +47,10 @@
         <div class="bat-imgDiv" style="top: 67%; left: 37%;"> <div class="bat-flyswatter"></div> <img src="{% static '/tballom/images/파리채.png' %}" /> </div>
         {% if user_bat %}
             <div>
-                <ul class="contextmenu menu">
+                <ul class="contextmenu menu" style="display: none;">
                     {# for문으로 자신이 산 배트 보여지게 #}
-                    {% for bat in user_bat %}
-                        <li><a>{{ bat }}</a></li>
+                    {% for bats in user_bat %}
+                        <li><a>{{ bats.bat.bat_name }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
