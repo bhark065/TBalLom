@@ -30,10 +30,17 @@ hr {
 }
 
 #body {
+    height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-bottom: 25px;
+}
+#body::-webkit-scrollbar {
+    display: none;
 }
 
 .list {
@@ -46,4 +53,8 @@ hr {
 .list p {
     width: 255px;
     text-align: center;
+}
+
+.currentUser p {
+    color: #0500FF;
 }
