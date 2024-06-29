@@ -9,23 +9,8 @@
 
 {% block js %}
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let pointDiv = document.querySelector('.point');
-            pointDiv.style.display = 'none';
-
-            function playBackgroundMusic() {
-                let bgMusic = document.getElementById('bgMusic');
-                bgMusic.play();
-
-                document.addEventListener('visibilitychange', function() {
-                    if (document.visibilityState === 'hidden') {
-                        bgMusic.pause();
-                    } else {
-                        bgMusic.play();
-                    }
-                });
-            }
-            window.onload = playBackgroundMusic();
+        document.addEventListener("DOMContentLoaded", function () {
+            playBackgroundMusic();
 
             // 이름 입력 안 하고 nav 클릭할 경우
             let navItems = document.querySelectorAll('.nav-item p');
@@ -35,11 +20,9 @@
                     if (!nameInput) {
                         alert("아이디를 입력하세요");
                         return false;
-                    } else {
-                        movePage();
                     }
                 });
-            });
+             });
 
             document.getElementById("name-form").onsubmit = function() {
                 var userName = document.getElementById("name-input").value;
@@ -49,6 +32,22 @@
                 }
             };
         });
+
+        function playBackgroundMusic() {
+            let bgMusic = document.getElementById('bgMusic');
+            bgMusic.autoplay = true;
+            bgMusic.loop = true;
+            bgMusic.load();
+            bgMusic.play();
+
+            document.addEventListener('visibilitychange', function() {
+                if (document.visibilityState === 'hidden') {
+                    bgMusic.pause();
+                } else {
+                    bgMusic.play();
+                }
+            });
+        }
     </script>
 {% endblock %}
 
