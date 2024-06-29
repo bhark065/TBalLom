@@ -34,6 +34,8 @@ function buyingBat(userId, bat_point, batName) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             console.log('배트 구매 성공');
+            let response = JSON.parse(xhr.responseText);
+            showAlert(response.status, 'success');
         } else if (xhr.readyState === XMLHttpRequest.DONE) {
             let response = JSON.parse(xhr.responseText);
             if (response.status === '이미 구매한 배트입니다.') {

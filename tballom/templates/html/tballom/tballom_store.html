@@ -9,7 +9,7 @@
 
 {% block js %}
     <script>
-        const userId = {{ request.user.id | default:"null" }};
+        const userId = {{ request.session.user_id }};
         let user_point = {{ user_point.user_point | default:0 }};
     </script>
 {% endblock %}
