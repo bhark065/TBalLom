@@ -13,14 +13,19 @@ def tballom_name_view(request):
 
     user = User.objects.filter(user_name=user_name).first()
     if user:
+        request.session['user_id'] = user.id
         return redirect('tballom:tballom_game_view')
     else:
         new_user = User.objects.create(user_name=user_name)
-        request.user = new_user
+        request.session['user_id'] = new_user.id
         return redirect('tballom:tballom_game_view')
 
 def tballom_game_view(request):
-    user = get_object_or_404(User, id=request.user.id)
+    user_id = request.session.get('user_id')
+    if not user_id:
+        return redirect('tballom:tballom_name_view')
+
+    user = get_object_or_404(User, id=user_id)
     user_point = Point.objects.filter(user=user).first()
     user_bat = UserBat.objects.filter(user=user)
     return render(request, 'html/tballom/tballom_game.html', {'user': user, 'user_point': user_point, 'user_bat': user_bat})
@@ -35,13 +40,8 @@ def save_score(request):
 
             user = User.objects.get(id=user_id)
             score, created = Score.objects.get_or_create(user=user)
-            if not created:
-                if score.user_score < user_score:
-                    score.user_score = user_score
-                    score.save()
-            else:
-                score.user_score = user_score
-                score.save()
+            score.user_score = user_score
+            score.save()
 
             return JsonResponse({'status': '저장 완료'}, status=200)
         except User.DoesNotExist:
@@ -97,7 +97,7 @@ def buying_bat(request):
                 point.user_point -= bat_point
                 point.save()
 
-            return JsonResponse({'status': '저장 완료'}, status=200)
+            return JsonResponse({'status': '배트 구매가 완료되었습니다.'}, status=200)
         except User.DoesNotExist:
             return JsonResponse({'status': '사용자를 찾을 수 없습니다'}, status=404)
         except ValueError:
@@ -108,7 +108,8 @@ def buying_bat(request):
         return JsonResponse({'status': '잘못된 요청'}, status=400)
 
 def tballom_store_view(request):
-    user = get_object_or_404(User, id=request.user.id)
+    user_id = request.session.get('user_id')
+    user = get_object_or_404(User, id=user_id)
     user_point = Point.objects.filter(user=user).first()
 
     return render(request, 'html/tballom/tballom_store.html', {'user_point': user_point})
@@ -119,17 +120,21 @@ def tballom_rank_view(request):
 
     # 리스트 컴프리헨션 : 리스트를 쉽게, 짧게 한 줄로 만들 수 있는 파이썬 문법
     # 리스트를 쉽게 만들면서 동시에 리스트를 반환함.
-    user_scores = [
-        {"name": user.user_name, "score": score.user_score}
-        for user, score in zip(users, scores)
-    ]
+    # user_scores = [
+    #     {"name": user.user_name, "score": score.user_score}
+    #     for user, score in zip(users, scores)
+    # ]
+    user_scores = []
+    for user, score in zip(users, scores):
+        user_scores.append({"userId": user.id, "name": user.user_name, "score": score.user_score})
 
     sorted_user_scores = sorted(user_scores, key=lambda x: x['score'], reverse=True)
 
     for idx, user_score in enumerate(sorted_user_scores, start=1):
         user_score['rank'] = idx
 
-    user = get_object_or_404(User, id=request.user.id)
+    user_id = request.session.get('user_id')
+    user = get_object_or_404(User, id=user_id)
     user_point = Point.objects.filter(user=user).first()
 
     return render(request, 'html/tballom/tballom_rank.html',{'user_scores': sorted_user_scores, 'user_point': user_point})
