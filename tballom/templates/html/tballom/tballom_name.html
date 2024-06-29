@@ -10,7 +10,9 @@
 {% block js %}
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            playBackgroundMusic();
+            document.body.addEventListener('click', function() {
+                playBackgroundMusic();
+             }, { once: true });
 
             // 이름 입력 안 하고 nav 클릭할 경우
             let navItems = document.querySelectorAll('.nav-item p');
@@ -38,13 +40,17 @@
             bgMusic.autoplay = true;
             bgMusic.loop = true;
             bgMusic.load();
-            bgMusic.play();
+            bgMusic.play().catch(function(error) {
+                console.log('자동 재생이 차단되었습니다:', error);
+            });
 
             document.addEventListener('visibilitychange', function() {
                 if (document.visibilityState === 'hidden') {
                     bgMusic.pause();
                 } else {
-                    bgMusic.play();
+                    bgMusic.play().catch(function(error) {
+                        console.log('자동 재생이 차단되었습니다:', error);
+                    });
                 }
             });
         }
