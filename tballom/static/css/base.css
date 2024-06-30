@@ -74,6 +74,8 @@ p {
 }
 
 .point {
+    display: flex;
+    column-gap: 10px;
     font-weight: var(--Bold);
     font-size: 18px;
     color: var(--main-color);

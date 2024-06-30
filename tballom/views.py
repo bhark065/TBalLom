@@ -43,7 +43,7 @@ def save_score(request):
             score.user_score = user_score
             score.save()
 
-            return JsonResponse({'status': '저장 완료'}, status=200)
+            return JsonResponse({'status': '저장 완료', 'user_score': score.user_score}, status=200)
         except User.DoesNotExist:
             return JsonResponse({'status': '사용자를 찾을 수 없습니다'}, status=404)
         except ValueError:
@@ -66,7 +66,7 @@ def save_point(request):
             point.user_point += user_score
             point.save()
 
-            return JsonResponse({'status': '저장 완료'}, status=200)
+            return JsonResponse({'status': '저장 완료', 'user_point': point.user_point}, status=200)
         except User.DoesNotExist:
             return JsonResponse({'status': '사용자를 찾을 수 없습니다'}, status=404)
         except ValueError:
@@ -97,7 +97,7 @@ def buying_bat(request):
                 point.user_point -= bat_point
                 point.save()
 
-            return JsonResponse({'status': '배트 구매가 완료되었습니다.'}, status=200)
+            return JsonResponse({'status': '배트 구매가 완료되었습니다.', 'user_point': point.user_point}, status=200)
         except User.DoesNotExist:
             return JsonResponse({'status': '사용자를 찾을 수 없습니다'}, status=404)
         except ValueError:

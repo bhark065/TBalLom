@@ -1,5 +1,7 @@
 // 배트 클릭 시 alert 창이 뜨고 구매 확정 후 구매 함수 호출
 let alert = document.getElementById("alert");
+let userPoint = document.querySelector(".point > #user_point");
+
 document.addEventListener('DOMContentLoaded', function() {
     let boxes = document.querySelectorAll('.box');
     boxes.forEach(function(box) {
@@ -35,6 +37,7 @@ function buyingBat(userId, bat_point, batName) {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             console.log('배트 구매 성공');
             let response = JSON.parse(xhr.responseText);
+            userPoint.innerText = response.user_point;
             showAlert(response.status, 'success');
         } else if (xhr.readyState === XMLHttpRequest.DONE) {
             let response = JSON.parse(xhr.responseText);
