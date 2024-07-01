@@ -6,7 +6,6 @@ var nav = document.querySelector('nav');
 var gameStateDiv = document.getElementById('result');
 let background = document.getElementById("background");
 let gameContainer = document.querySelector('.game-container');
-let userPoint = document.querySelector(".point > #user_point");
 
 let swingCount = 0; // 배트 휘든 횟수
 let swingingResult = null;
@@ -877,8 +876,6 @@ function saveScore() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             console.log('Score 저장 완료!');
-            let response = JSON.parse(xhr.responseText);
-            userPoint.innerText = response.user_point;
         } else if (xhr.readyState === XMLHttpRequest.DONE) {
             console.log('Score 저장 실패:', xhr.status);
         }
